@@ -29,6 +29,7 @@ ChannelListWidget::~ChannelListWidget()
 
 void ChannelListWidget::switchBox(int i)
 {
+	if(channels.count() > i)
 	channels[i]->enable(!channels[i]->is_enabled());
 }
 

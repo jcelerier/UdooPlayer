@@ -38,9 +38,9 @@ HEADERS  += MainWindow.h \
 	TrackingSlider.h \
 	SerialManager.h \
 	ConfigurationDialog.h \
-	osc/oscmessagegenerator.h \
-	osc/oscreceiver.h \
-	osc/oscsender.h \
+#	osc/oscmessagegenerator.h \
+#	osc/oscreceiver.h \
+#	osc/oscsender.h \
     GraphicalTimeCount.h
 
 FORMS    += MainWindow.ui \
@@ -70,9 +70,9 @@ OTHER_FILES += \
 
 #### Libraries ####
   ##  Oscpack  ##
-unix:!macx: LIBS += -L$$PWD/../../../git/oscpack/build/ -loscpack
+#unix:!macx: LIBS += -L$$PWD/../../../git/oscpack/build/ -loscpack
 
-INCLUDEPATH += $$PWD/../../../git/oscpack/src
-DEPENDPATH += $$PWD/../../../git/oscpack/src
+#INCLUDEPATH += $$PWD/../../../git/oscpack/src
+#DEPENDPATH += $$PWD/../../../git/oscpack/src
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/../../../git/oscpack/build/liboscpack.a
+#unix:!macx: PRE_TARGETDEPS += $$PWD/../../../git/oscpack/build/liboscpack.a
