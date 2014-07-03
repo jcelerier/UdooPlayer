@@ -12,13 +12,15 @@ SOURCES += main.cpp\
 	ChannelWidget.cpp \
 	ChannelListWidget.cpp \
 	MainWidget.cpp \
-	PlayThread.cpp
+	PlayThread.cpp \
+    SongData.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
 	ChannelListWidget.h \
 	MainWidget.h \
-	PlayThread.h
+	PlayThread.h \
+    SongData.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
@@ -26,7 +28,7 @@ FORMS    += MainWindow.ui \
 	MainWidget.ui
 
 
-INCLUDEPATH += $$PWD/../watermarking/src/libwatermark
-DEPENDPATH += $$PWD/../watermarking/src/libwatermark
+INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
+DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
 LIBS+=-lsndfile -lfftw3 -lgcov -lportaudiocpp -lportaudio

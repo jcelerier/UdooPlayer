@@ -1,6 +1,6 @@
 #include "ChannelListWidget.h"
 #include "ui_ChannelListWidget.h"
-
+#include "ChannelWidget.h"
 
 
 ChannelListWidget::ChannelListWidget(QWidget *parent) :
@@ -9,6 +9,10 @@ ChannelListWidget::ChannelListWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	for(int i = 0; i < 8; i++)
+		channels << new ChannelWidget(this);
+		ui->horizontalLayout->addWidget(new ChannelWidget(this));
+	/*
 	ui->widget->setButtonColor("#FF0000");
 	ui->widget_2->setButtonColor("#00FF00");
 	ui->widget_3->setButtonColor("#0000FF");
@@ -20,6 +24,7 @@ ChannelListWidget::ChannelListWidget(QWidget *parent) :
 
 	connect(ui->widget, SIGNAL(volumeChanged(int)), this, SIGNAL(volume1Changed(int)));
 	connect(ui->widget_2, SIGNAL(volumeChanged(int)), this, SIGNAL(volume2Changed(int)));
+	*/
 }
 
 ChannelListWidget::~ChannelListWidget()

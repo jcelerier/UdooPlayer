@@ -29,20 +29,13 @@ PlayThread::PlayThread(QObject *parent) :
 
 void PlayThread::run()
 {
-
 	Parameters<double> conf;
 
 
 	auto stereo_loop_file1 = new StereoAdapter<double>(new LoopInputProxy<double>(new FileInput<double>("/home/doom/travail/watermarking/output/beat1.wav", conf)));
 	auto stereo_loop_file2 = new StereoAdapter<double>(new LoopInputProxy<double>(new FileInput<double>("/home/doom/travail/watermarking/output/beat2.wav", conf)));
 
-	vol1 =  new Amplify<double>(conf);
-	vol2 =  new Amplify<double>(conf);
 
-	auto pan1 = new Pan<double>(conf);
-	auto pan2 = new Pan<double>(conf);
-	pan1->setPan(-0.4);
-	pan2->setPan(0.8);
 	auto fxchannel1 = Benchmark_p(new Sequence<double>(conf,
 													   vol1,
 													   pan1));
@@ -51,12 +44,18 @@ void PlayThread::run()
 													   vol2,
 													   pan2));
 
-	auto input = Input_p(new SummationProxy<double>(
-							 new InputMultiplexer<double>(conf,
-														  new SfxInputProxy<double>(stereo_loop_file1,
-																					fxchannel1),
-														  new SfxInputProxy<double>(stereo_loop_file2,
-																					fxchannel2))));
+	auto summedinputs = Input_p(new SummationProxy<double>(
+							new InputMultiplexer<double>(conf,
+								 new SfxInputProxy<double>(stereo_loop_file1,
+														   fxchannel1),
+								 new SfxInputProxy<double>(stereo_loop_file2,
+														   fxchannel2))));
+
+	auto masterfxchannel = Benchmark_p(masterVolume);
+
+	auto input = Input_p(new SfxInputProxy<double>(
+							 summedinputs,
+							 masterfxchannel));
 
 
 	auto zeO = new PortaudioOutput<double>(conf);
@@ -65,4 +64,9 @@ void PlayThread::run()
 	StreamingManager<double> manager(std::move(input), std::move(output), conf);
 
 	manager.execute();
+}
+
+void PlayThread::load(SongData s)
+{
+
 }

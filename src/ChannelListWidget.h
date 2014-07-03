@@ -7,11 +7,14 @@ namespace Ui {
 	class ChannelListWidget;
 }
 
+class ChannelWidget;
+
 class ChannelListWidget : public QWidget
 {
 		Q_OBJECT
 
 	public:
+		QVector<ChannelWidget*> channels;
 		explicit ChannelListWidget(QWidget *parent = 0);
 		~ChannelListWidget();
 

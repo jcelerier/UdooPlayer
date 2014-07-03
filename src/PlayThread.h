@@ -5,6 +5,10 @@
 
 
 #include <benchmark/Amplify.h>
+#include <benchmark/Pan.h>
+
+#include "SongData.h"
+
 #include <QDebug>
 class PlayThread : public QThread
 {
@@ -16,21 +20,38 @@ class PlayThread : public QThread
 
 	public slots:
 		void run();
-		void setVol1(int vol)
+
+		void stop()
 		{
-			vol1->setGain(vol / 100.0);
+
 		}
 
-		void setVol2(int vol)
+		void play()
 		{
-			vol2->setGain(vol / 100.0);
+
 		}
 
+		void setMasterVolume(int vol)
+		{
+			masterVolume->setGain(vol / 100.0);
+		}
+
+		void setVolume(int channel, int vol)
+		{
+			volumes[channel]->setGain(vol / 100.0);
+		}
+
+		void setPan(int channel, int pan)
+		{
+			pans[channel]->setPan(pan / 100.0);
+		}
+
+		void load(SongData s);
 
 	private:
-		Amplify<double>* vol1;
-		Amplify<double>* vol2;
-
+		Amplify<double>* masterVolume;
+		std::vector<Amplify<double>*> volumes;
+		std::vector<Pan<double>*> pans;
 };
 
 #endif // PLAYTHREAD_H
