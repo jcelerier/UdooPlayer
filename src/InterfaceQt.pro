@@ -13,20 +13,21 @@ SOURCES += main.cpp\
 	ChannelListWidget.cpp \
 	MainWidget.cpp \
 	PlayThread.cpp \
-    SongData.cpp
+	SongData.cpp \
+	SaveManager.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
 	ChannelListWidget.h \
 	MainWidget.h \
 	PlayThread.h \
-    SongData.h
+	SongData.h \
+	SaveManager.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
 	ChannelListWidget.ui \
 	MainWidget.ui
-
 
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark

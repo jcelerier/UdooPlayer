@@ -6,7 +6,7 @@ PlayThread::PlayThread(QObject *parent) :
 }
 
 
-#include <io/FileInput.h>
+#include <io/FFMPEGFileInput.h>
 #include <io/FileOutput.h>
 #include <io/LoopInputProxy.h>
 
@@ -29,44 +29,32 @@ PlayThread::PlayThread(QObject *parent) :
 
 void PlayThread::run()
 {
-	Parameters<double> conf;
+	manager->execute();
+}
 
+void PlayThread::stop()
+{
+	manager->stop();
+}
 
-	auto stereo_loop_file1 = new StereoAdapter<double>(new LoopInputProxy<double>(new FileInput<double>("/home/doom/travail/watermarking/output/beat1.wav", conf)));
-	auto stereo_loop_file2 = new StereoAdapter<double>(new LoopInputProxy<double>(new FileInput<double>("/home/doom/travail/watermarking/output/beat2.wav", conf)));
+void PlayThread::load(SongData s)
+{
+	int track_count = s.tracks.size();
+	volumes.resize(track_count, std::make_shared<Amplify<double>>(conf));
+	pans.resize(track_count, std::make_shared<Pan<double>>(conf));
 
+	std::vector<Input_p> chains;
+	for(int i = 0; i < track_count; i++)
+	{
+		chains.emplace_back(new SfxInputProxy<double>(new StereoAdapter<double>(new LoopInputProxy<double>(new FFMPEGFileInput<double>(s.tracks[i].file, conf))),
+													  new Sequence<double>(conf, volumes[i], pans[i])));
+	}
 
-	auto fxchannel1 = Benchmark_p(new Sequence<double>(conf,
-													   vol1,
-													   pan1));
-
-	auto fxchannel2 = Benchmark_p(new Sequence<double>(conf,
-													   vol2,
-													   pan2));
-
-	auto summedinputs = Input_p(new SummationProxy<double>(
-							new InputMultiplexer<double>(conf,
-								 new SfxInputProxy<double>(stereo_loop_file1,
-														   fxchannel1),
-								 new SfxInputProxy<double>(stereo_loop_file2,
-														   fxchannel2))));
-
-	auto masterfxchannel = Benchmark_p(masterVolume);
-
-	auto input = Input_p(new SfxInputProxy<double>(
-							 summedinputs,
-							 masterfxchannel));
+	auto input = Input_p(new SfxInputProxy<double>(new SummationProxy<double>(new InputMultiplexer<double>(conf, chains)), masterVolume));
 
 
 	auto zeO = new PortaudioOutput<double>(conf);
 	auto output = std::shared_ptr<PortaudioOutput<double>>(zeO);
 
-	StreamingManager<double> manager(std::move(input), std::move(output), conf);
-
-	manager.execute();
-}
-
-void PlayThread::load(SongData s)
-{
-
+	manager = std::make_shared<StreamingManager<double>>(std::move(input), std::move(output), conf);
 }

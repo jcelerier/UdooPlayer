@@ -169,8 +169,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>stop</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWidget</receiver>
+   <slot>stop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play()</slot>
+  <slot>stop()</slot>
+  <slot>slot2()</slot>
  </slots>
 </ui>

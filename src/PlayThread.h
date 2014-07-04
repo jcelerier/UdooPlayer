@@ -10,6 +10,10 @@
 #include "SongData.h"
 
 #include <QDebug>
+
+template<typename T>
+class StreamingManager;
+
 class PlayThread : public QThread
 {
 		Q_OBJECT
@@ -20,11 +24,6 @@ class PlayThread : public QThread
 
 	public slots:
 		void run();
-
-		void stop()
-		{
-
-		}
 
 		void play()
 		{
@@ -48,10 +47,16 @@ class PlayThread : public QThread
 
 		void load(SongData s);
 
+
+
+		void stop();
 	private:
-		Amplify<double>* masterVolume;
-		std::vector<Amplify<double>*> volumes;
-		std::vector<Pan<double>*> pans;
+		Parameters<double> conf;
+		std::shared_ptr<Amplify<double>> masterVolume{new Amplify<double>(conf)};
+		std::vector<std::shared_ptr<Amplify<double>>> volumes;
+		std::vector<std::shared_ptr<Pan<double>>> pans;
+
+		std::shared_ptr<StreamingManager<double>> manager;
 };
 
 #endif // PLAYTHREAD_H

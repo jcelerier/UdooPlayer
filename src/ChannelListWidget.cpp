@@ -10,8 +10,10 @@ ChannelListWidget::ChannelListWidget(QWidget *parent) :
 	ui->setupUi(this);
 
 	for(int i = 0; i < 8; i++)
+	{
 		channels << new ChannelWidget(this);
-		ui->horizontalLayout->addWidget(new ChannelWidget(this));
+		ui->horizontalLayout->addWidget(channels.last());
+	}
 	/*
 	ui->widget->setButtonColor("#FF0000");
 	ui->widget_2->setButtonColor("#00FF00");
