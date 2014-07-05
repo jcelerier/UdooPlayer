@@ -25,11 +25,6 @@ class PlayThread : public QThread
 	public slots:
 		void run();
 
-		void play()
-		{
-
-		}
-
 		void setMasterVolume(int vol)
 		{
 			masterVolume->setGain(vol / 100.0);
@@ -46,8 +41,6 @@ class PlayThread : public QThread
 		}
 
 		void load(SongData s);
-
-
 
 		void stop();
 	private:
