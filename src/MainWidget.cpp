@@ -8,8 +8,15 @@ MainWidget::MainWidget(QWidget *parent) :
 	ui(new Ui::MainWidget)
 {
 	ui->setupUi(this);
-	connect(ui->widget, SIGNAL(volume1Changed(int)), &playThread, SLOT(setVol1(int)));
-	connect(ui->widget, SIGNAL(volume2Changed(int)), &playThread, SLOT(setVol2(int)));
+	connect(ui->channelList, SIGNAL(volumeChanged(int, int)),
+			&playThread,	 SLOT(setVolume(int,int)));
+	connect(ui->channelList, SIGNAL(panChanged(int, int)),
+			&playThread,	 SLOT(setPan(int,int)));
+	connect(ui->channelList, SIGNAL(muteChanged(int,bool)),
+			&playThread,	 SLOT(setMute(int,bool)));
+
+	connect(ui->masterVolume, SIGNAL(sliderMoved(int)),
+			&playThread,	  SLOT(setMasterVolume(int)));
 }
 
 MainWidget::~MainWidget()
@@ -35,8 +42,12 @@ void MainWidget::load()
 												"Data file (*.ini)");
 	if(!file.isEmpty())
 	{
-		SongData data = savemanager.load(file);
+		SongData song = savemanager.load(file);
 
-		playThread.load(data);
+		playThread.load(song);
+
+		ui->channelList->clear();
+		ui->channelList->load(song);
 	}
+
 }

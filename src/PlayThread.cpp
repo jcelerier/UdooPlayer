@@ -31,14 +31,22 @@ void PlayThread::stop()
 void PlayThread::load(SongData s)
 {
 	int track_count = s.tracks.size();
-	volumes.resize(track_count, std::make_shared<Amplify<double>>(conf));
-	pans.resize(track_count, std::make_shared<Pan<double>>(conf));
+	volumes.clear();
+	pans.clear();
+	mutes.clear();
+
+	for(int i = 0; i < track_count; i++)
+	{
+		volumes.push_back(std::make_shared<Amplify<double>>(conf));
+		pans.push_back(std::make_shared<Pan<double>>(conf));
+		mutes.push_back(std::make_shared<Mute<double>>(conf));
+	}
 
 	std::vector<Input_p> chains;
 	for(int i = 0; i < track_count; i++)
 	{
 		chains.emplace_back(new SfxInputProxy<double>(new StereoAdapter<double>(new LoopInputProxy<double>(new FFMPEGFileInput<double>(s.tracks[i].file, conf))),
-													  new Sequence<double>(conf, volumes[i], pans[i])));
+													  new Sequence<double>(conf, volumes[i], pans[i], mutes[i])));
 	}
 
 	auto input = Input_p(new SfxInputProxy<double>(new SummationProxy<double>(new InputMultiplexer<double>(conf, chains)), masterVolume));

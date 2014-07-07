@@ -6,6 +6,10 @@ TARGET = InterfaceQt
 TEMPLATE = app
 CONFIG += c++11
 
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_LFLAGS_RELEASE -= -O1
+QMAKE_CXXFLAGS_RELEASE += -O3 -fopenmp -march=native
+
 
 SOURCES += main.cpp\
 		MainWindow.cpp \
@@ -14,7 +18,8 @@ SOURCES += main.cpp\
 	MainWidget.cpp \
 	PlayThread.cpp \
 	SongData.cpp \
-	SaveManager.cpp
+	SaveManager.cpp \
+    TrackingSlider.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -22,7 +27,8 @@ HEADERS  += MainWindow.h \
 	MainWidget.h \
 	PlayThread.h \
 	SongData.h \
-	SaveManager.h
+	SaveManager.h \
+    TrackingSlider.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \

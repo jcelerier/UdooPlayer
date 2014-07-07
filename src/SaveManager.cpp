@@ -20,10 +20,10 @@ SongData SaveManager::load(QString name)
 	for(int i = 0; i < count; ++ i)
 	{
 		sd.tracks.emplace(sd.tracks.begin() + i,
-						  std::string("NoName"),
+						  settings.value(QString("Track%1/name").arg(i)).toString().toStdString(),
 						  settings.value(QString("Track%1/filename").arg(i)).toString().toStdString(),
-						  0.0,
-						  0.0);
+						  settings.value(QString("Track%1/volume").arg(i)).toInt(),
+						  settings.value(QString("Track%1/pan").arg(i)).toInt());
 	}
 
 	return sd;

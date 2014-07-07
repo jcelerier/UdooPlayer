@@ -6,6 +6,7 @@
 
 #include <benchmark/Amplify.h>
 #include <benchmark/Pan.h>
+#include <benchmark/Mute.h>
 
 #include "SongData.h"
 
@@ -40,14 +41,20 @@ class PlayThread : public QThread
 			pans[channel]->setPan(pan / 100.0);
 		}
 
-		void load(SongData s);
+		void setMute(int channel, bool doMute)
+		{
+			doMute? mutes[channel]->mute() : mutes[channel]->unmute();
+		}
 
+		void load(SongData s);
 		void stop();
+
 	private:
 		Parameters<double> conf;
 		std::shared_ptr<Amplify<double>> masterVolume{new Amplify<double>(conf)};
 		std::vector<std::shared_ptr<Amplify<double>>> volumes;
 		std::vector<std::shared_ptr<Pan<double>>> pans;
+		std::vector<std::shared_ptr<Mute<double>>> mutes;
 
 		std::shared_ptr<StreamingManager<double>> manager;
 };

@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="ChannelListWidget" name="widget" native="true">
+    <widget class="ChannelListWidget" name="channelList" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -131,7 +131,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider">
+        <widget class="QSlider" name="masterVolume">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

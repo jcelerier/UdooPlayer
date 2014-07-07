@@ -2,6 +2,7 @@
 #define CHANNELLISTWIDGET_H
 
 #include <QWidget>
+#include <SongData.h>
 
 namespace Ui {
 	class ChannelListWidget;
@@ -19,8 +20,18 @@ class ChannelListWidget : public QWidget
 		~ChannelListWidget();
 
 	signals:
-		void volume1Changed(int);
-		void volume2Changed(int);
+		void volumeChanged(int, int);
+		void panChanged(int, int);
+		void muteChanged(int, bool);
+
+	public slots:
+		void clear();
+		void load(SongData s);
+
+		void on_volumeChanged(int);
+		void on_panChanged(int);
+		void on_muteChanged(bool);
+		void on_soloChanged(bool);
 
 	private:
 		Ui::ChannelListWidget *ui;

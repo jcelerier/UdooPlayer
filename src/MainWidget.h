@@ -21,8 +21,8 @@ class MainWidget : public QWidget
 	public slots:
 		void play();
 		void load();
-
 		void stop();
+
 	private:
 		Ui::MainWidget *ui;
 		PlayThread playThread;
