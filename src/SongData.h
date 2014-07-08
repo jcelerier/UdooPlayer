@@ -25,4 +25,5 @@ class SongData
 		SongData();
 
 		std::vector<TrackData> tracks{};
+		int tempo{};
 };

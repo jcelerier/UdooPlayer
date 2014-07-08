@@ -19,7 +19,7 @@ SOURCES += main.cpp\
 	PlayThread.cpp \
 	SongData.cpp \
 	SaveManager.cpp \
-    TrackingSlider.cpp
+	TrackingSlider.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -28,7 +28,7 @@ HEADERS  += MainWindow.h \
 	PlayThread.h \
 	SongData.h \
 	SaveManager.h \
-    TrackingSlider.h
+	TrackingSlider.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
@@ -38,4 +38,4 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+=-lsndfile -lfftw3 -lgcov -lportaudiocpp -lportaudio
+LIBS+=-lsndfile -lfftw3 -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil

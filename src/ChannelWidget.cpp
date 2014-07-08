@@ -8,10 +8,10 @@ ChannelWidget::ChannelWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	connect(ui->volume, SIGNAL(sliderMoved(int)),
+	connect(ui->volume, SIGNAL(valueChanged(int)),
 			this,		SIGNAL(volumeChanged(int)));
 
-	connect(ui->pan,	SIGNAL(sliderMoved(int)),
+	connect(ui->pan,	SIGNAL(valueChanged(int)),
 			this,		SIGNAL(panChanged(int)));
 
 	connect(ui->mute,	SIGNAL(toggled(bool)),

@@ -15,6 +15,7 @@ SongData SaveManager::load(QString name)
 	SongData sd;
 
 	int count = settings.value("General/trackCount").toInt();
+	sd.tempo =  settings.value("General/tempo").toInt();
 	sd.tracks.reserve(count);
 
 	for(int i = 0; i < count; ++ i)

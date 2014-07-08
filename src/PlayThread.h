@@ -22,6 +22,8 @@ class PlayThread : public QThread
 		explicit PlayThread(QObject *parent = 0);
 
 	signals:
+		void spentTime(double);
+		void setTotalTime(double);
 
 	public slots:
 		void run();
@@ -46,6 +48,12 @@ class PlayThread : public QThread
 			doMute? mutes[channel]->mute() : mutes[channel]->unmute();
 		}
 
+		void timeHandle()
+		{
+			if(++bufferCount > maxBufferCount) bufferCount = 0;
+			emit spentTime(bufferCount * conf.bufferSize / double(conf.samplingRate));
+		}
+
 		void load(SongData s);
 		void stop();
 
@@ -57,6 +65,9 @@ class PlayThread : public QThread
 		std::vector<std::shared_ptr<Mute<double>>> mutes;
 
 		std::shared_ptr<StreamingManager<double>> manager;
+
+		int bufferCount{};
+		int maxBufferCount{};
 };
 
 #endif // PLAYTHREAD_H
