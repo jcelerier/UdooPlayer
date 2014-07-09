@@ -3,12 +3,17 @@
 
 #include <QObject>
 
+#include <QTemporaryDir>
+#include <memory>
 #include <SongData.h>
 class SaveManager : public QObject
 {
 		Q_OBJECT
 	public:
 		explicit SaveManager(QObject *parent = 0);
+
+		std::shared_ptr<QTemporaryDir> tempdir{};
+
 
 	public slots:
 		SongData load(QString name);

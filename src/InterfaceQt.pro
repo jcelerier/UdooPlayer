@@ -10,6 +10,9 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_LFLAGS_RELEASE -= -O1
 QMAKE_CXXFLAGS_RELEASE += -O3 -fopenmp -march=native
 
+QMAKE_CXXFLAGS_DEBUG -= -O1
+QMAKE_CXXFLAGS_DEBUG -= -O2
+QMAKE_CXXFLAGS_DEBUG += -O0 -Wno-unknown-pragmas
 
 SOURCES += main.cpp\
 		MainWindow.cpp \
@@ -39,3 +42,7 @@ INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
 LIBS+=-lsndfile -lfftw3 -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
+
+
+INCLUDEPATH += /usr/local/include/KF5/KArchive
+LIBS += -lKF5Archive

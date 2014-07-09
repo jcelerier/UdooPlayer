@@ -68,7 +68,7 @@ void MainWidget::load()
 	QString file = QFileDialog::getOpenFileName(this,
 												"Charger",
 												QString(),
-												"Data file (*.ini)");
+												"Musique (*.song)");
 	if(!file.isEmpty())
 	{
 		SongData song = savemanager.load(file);

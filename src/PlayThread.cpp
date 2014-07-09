@@ -20,13 +20,15 @@ PlayThread::PlayThread(QObject *parent) :
 
 void PlayThread::run()
 {
+	manager->input()->reset();
+	bufferCount = 0;
 	manager->execute();
 }
 
 void PlayThread::stop()
 {
-	manager->input()->reset();
 	manager->stop();
+	manager->input()->reset();
 	bufferCount = 0;
 }
 
@@ -37,6 +39,7 @@ void PlayThread::load(SongData s)
 	volumes.clear();
 	pans.clear();
 	mutes.clear();
+	manager.reset();
 
 	for(int i = 0; i < track_count; i++)
 	{
@@ -50,7 +53,7 @@ void PlayThread::load(SongData s)
 	{
 		auto file = new FFMPEGFileInput<double>(s.tracks[i].file, conf);
 		maxBufferCount = file->v(0).size() / conf.bufferSize;
-		emit setTotalTime(file->v(0).size() / 44100.0);
+		emit setTotalTime(file->v(0).size() / double(conf.samplingRate));
 		chains.emplace_back(new SfxInputProxy<double>(new StereoAdapter<double>(new LoopInputProxy<double>(file)),
 													  new Sequence<double>(conf, volumes[i], pans[i], mutes[i])));
 	}
