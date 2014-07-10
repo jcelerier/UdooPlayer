@@ -9,7 +9,7 @@ Installation on a new UDOO image (Ubuntu 12.04)
     sudo add-apt-repository ppa:ubuntu-sdk-team/ppa
     sudo apt-get update
     sudo apt-get dist-upgrade
-    sudo apt-get install g++-4.8 ubuntu-sdk libportaudiocpp0 libportaudio-dev libavfilter-dev libavformat-dev libavcodec-dev cmake
+    sudo apt-get install git g++-4.8 ubuntu-sdk libportaudiocpp0 libportaudio-dev libavfilter-dev libavformat-dev libavcodec-dev cmake
   
 
 Build KDE Frameworks 5 Archive : 
