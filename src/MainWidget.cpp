@@ -67,7 +67,7 @@ void MainWidget::load()
 	stop();
 	QString file = QFileDialog::getOpenFileName(this,
 												"Charger",
-												QString(),
+												"/home/ubuntu/songs", // Hardcodé
 												"Musique (*.song)");
 	if(!file.isEmpty())
 	{
