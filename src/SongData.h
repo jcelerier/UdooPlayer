@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+
+// Information d'une piste
 struct TrackData
 {
 		TrackData() = default;
@@ -19,11 +21,10 @@ struct TrackData
 		double pan;
 };
 
-class SongData
+// Information pour le morceau entier
+struct SongData
 {
-	public:
-		SongData();
-
 		std::vector<TrackData> tracks{};
 		int tempo{};
+		std::string name{};
 };

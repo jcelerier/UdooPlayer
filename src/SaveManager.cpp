@@ -21,9 +21,9 @@ SongData SaveManager::load(QString loadpath)
 	KZip archive(loadpath);
 	qDebug() << loadpath;
 
-	if (!archive.open(QIODevice::ReadOnly)) {
-		qWarning("Cannot open the archive");
-		qWarning("Is it a valid zip file?");
+	if (!archive.open(QIODevice::ReadOnly))
+	{
+		throw std::runtime_error("Fichier invalide.");
 	}
 
 	const KArchiveDirectory *root = archive.directory();
@@ -37,7 +37,6 @@ SongData SaveManager::load(QString loadpath)
 	QStringList nameFilter("*.ini");
 	QDir directory(tempdir->path());
 	QString iniFile = tempdir->path() + "/" + directory.entryList(nameFilter).first();
-	qDebug() << iniFile;
 
 	//// Chargement
 	QSettings settings(iniFile, QSettings::IniFormat);

@@ -20,7 +20,6 @@ SOURCES += main.cpp\
 	ChannelListWidget.cpp \
 	MainWidget.cpp \
 	PlayThread.cpp \
-	SongData.cpp \
 	SaveManager.cpp \
 	TrackingSlider.cpp
 
@@ -41,7 +40,7 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+=-lsndfile -lfftw3 -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
+LIBS+=-lsndfile -lfftw3 -lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive

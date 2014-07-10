@@ -25,7 +25,10 @@ class ChannelListWidget : public QWidget
 		void muteChanged(int, bool);
 
 	public slots:
+		// Supprime toutes les pistes de l'interface
 		void clear();
+
+		// Charge un nouveau jeu de pistes
 		void load(SongData s);
 
 		void on_volumeChanged(int);

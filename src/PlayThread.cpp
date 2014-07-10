@@ -15,7 +15,7 @@
 PlayThread::PlayThread(QObject *parent) :
 	QThread(parent)
 {
-	conf.bufferSize = 128;
+	conf.bufferSize = 1024;
 }
 
 void PlayThread::run()
@@ -34,6 +34,7 @@ void PlayThread::stop()
 
 void PlayThread::load(SongData s)
 {
+	//// Remise à 0
 	bufferCount = 0;
 	int track_count = s.tracks.size();
 	volumes.clear();
@@ -41,16 +42,14 @@ void PlayThread::load(SongData s)
 	mutes.clear();
 	manager.reset();
 
+	//// Chargement
+	std::vector<Input_p> chains;
 	for(int i = 0; i < track_count; i++)
 	{
 		volumes.push_back(std::make_shared<Amplify<double>>(conf));
 		pans.push_back(std::make_shared<Pan<double>>(conf));
 		mutes.push_back(std::make_shared<Mute<double>>(conf));
-	}
 
-	std::vector<Input_p> chains;
-	for(int i = 0; i < track_count; i++)
-	{
 		auto file = new FFMPEGFileInput<double>(s.tracks[i].file, conf);
 		maxBufferCount = file->v(0).size() / conf.bufferSize;
 		emit setTotalTime(file->v(0).size() / double(conf.samplingRate));
@@ -58,14 +57,12 @@ void PlayThread::load(SongData s)
 													  new Sequence<double>(conf, volumes[i], pans[i], mutes[i])));
 	}
 
+	// Piste master
 	auto input = Input_p(new SfxInputProxy<double>(new SummationProxy<double>(new InputMultiplexer<double>(conf, chains)), masterVolume));
 
-
-	auto zeO = new PortaudioOutput<double>(conf);
-	auto output = std::shared_ptr<PortaudioOutput<double>>(zeO);
-
+	// Manager
 	manager = std::make_shared<StreamingManager<double>>(std::move(input),
-														 std::move(output),
+														 std::move(std::make_shared<PortaudioOutput<double>>(conf)),
 														 std::bind(&PlayThread::timeHandle, this),
 														 conf);
 }

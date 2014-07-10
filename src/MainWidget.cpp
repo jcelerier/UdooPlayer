@@ -2,7 +2,7 @@
 #include "ui_MainWidget.h"
 
 #include <QFileDialog>
-
+#include <QMessageBox>
 MainWidget::MainWidget(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::MainWidget)
@@ -19,9 +19,11 @@ MainWidget::MainWidget(QWidget *parent) :
 			&playThread,	  SLOT(setMasterVolume(int)));
 
 	connect(&playThread,	&PlayThread::spentTime,
-			this,			&MainWidget::updateTime);
+			this,			&MainWidget::updateBeat);
 	connect(&playThread,	&PlayThread::setTotalTime,
-			this,			&MainWidget::updateTotalTime);
+			this,			&MainWidget::updateBeatCount);
+
+	ui->masterVolume->setDefaultValue(80);
 }
 
 MainWidget::~MainWidget()
@@ -31,54 +33,69 @@ MainWidget::~MainWidget()
 
 void MainWidget::play()
 {
-	if(!loaded) load();
+	if(!m_loaded)
+	{
+		if(load()) return;
+	}
+
 	playThread.start();
 }
 
 void MainWidget::stop()
 {
-	if(!loaded) return;
+	if(!m_loaded) return;
 	playThread.stop();
-	prev_t = -1;
+	m_previousBeat = -1;
 }
 
-void MainWidget::updateTime(double t) // en secondes
+void MainWidget::updateBeat(double t) // en secondes
 {
 	int time{t * getTempo() / 60.0};
-	if(time != prev_t)
+	if(time != m_previousBeat)
 	{
 		ui->temps->setText(QString("%1 / %2").arg(time)
-											 .arg(int(m_totalTime)));
-		prev_t = time;
+						   .arg(int(m_beatCount)));
+		m_previousBeat = time;
 	}
 }
 
-void MainWidget::updateTotalTime(double t) // en secondes
+void MainWidget::updateBeatCount(double t) // en secondes
 {
 	// Ici on calcule le nombre de temps dans la boucle.
 	// Formule : secondes * tempo/60 = nb. temps ds boucle.
 
-	m_totalTime = t * getTempo() / 60.0;
-	prev_t = -1;
+	m_beatCount = t * getTempo() / 60.0;
+	m_previousBeat = -1;
 }
 
-void MainWidget::load()
+int MainWidget::load()
 {
-	stop();
-	QString file = QFileDialog::getOpenFileName(this,
-												"Charger",
-												"/home/ubuntu/songs", // Hardcodé
-												"Musique (*.song)");
-	if(!file.isEmpty())
+	try
 	{
-		SongData song = savemanager.load(file);
-		setTempo(song.tempo);
+		stop();
+		QString file = QFileDialog::getOpenFileName(this,
+													"Charger",
+													"/home/ubuntu/songs", // Hardcodé
+													"Musique (*.song)");
+		if(!file.isEmpty())
+		{
+			SongData song = savemanager.load(file);
+			setTempo(song.tempo);
 
-		playThread.load(song);
+			playThread.load(song);
 
-		ui->channelList->clear();
-		ui->channelList->load(song);
+			ui->channelList->clear();
+			ui->channelList->load(song);
+			ui->masterVolume->setValue(80);
+		}
+
+		m_loaded = true;
+	}
+	catch(std::exception& e)
+	{
+		QMessageBox::warning(this, tr("Erreur au chargement"), e.what());
+		return 1;
 	}
 
-	loaded = true;
+	return 0;
 }

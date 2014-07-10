@@ -12,10 +12,12 @@ class SaveManager : public QObject
 	public:
 		explicit SaveManager(QObject *parent = 0);
 
+		// Dossier temporaire ou sont extraits les .song
 		std::shared_ptr<QTemporaryDir> tempdir{};
 
 
 	public slots:
+		// Charge un fichier
 		SongData load(QString name);
 
 };

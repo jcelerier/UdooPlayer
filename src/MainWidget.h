@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "PlayThread.h"
 #include <SaveManager.h>
+#include <exception>
 
 namespace Ui {
 	class MainWidget;
@@ -26,13 +27,22 @@ class MainWidget : public QWidget
 		}
 
 	public slots:
+		// Lance la lecture
 		void play();
-		void load();
+
+		// Charge un morceau
+		int load();
+
+		// S'arrête
 		void stop();
 
-		void updateTime(double);
+		// Met à jour le temps actuel affiché (ex. 13 / 32)
+		void updateBeat(double);
 
-		void updateTotalTime(double t);
+		// Met à jour le temps total (ex. 32)
+		void updateBeatCount(double t);
+
+		// Définit le tempo
 		void setTempo(int arg)
 		{
 			m_tempo = arg;
@@ -42,11 +52,15 @@ class MainWidget : public QWidget
 		Ui::MainWidget *ui;
 		PlayThread playThread;
 		SaveManager savemanager;
-		int m_tempo{};
-		double m_totalTime{};
-		int prev_t{-1};
 
-		bool loaded{false};
+		int m_tempo{};
+		double m_beatCount{};
+
+		// Optimisation : on compare avec le temps précédent.
+		int m_previousBeat{-1};
+
+		// Indique si un morceau a été chargé.
+		bool m_loaded{false};
 };
 
 #endif // MAINWIDGET_H

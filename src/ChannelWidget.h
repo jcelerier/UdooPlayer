@@ -12,16 +12,23 @@ class ChannelListWidget;
 class ChannelWidget : public QWidget
 {
 		Q_OBJECT
-	friend class ChannelListWidget;
+		friend class ChannelListWidget;
 	public:
 		explicit ChannelWidget(QWidget *parent = 0);
 		~ChannelWidget();
 
-	void setButtonColor(QString);
-	void load(TrackData track);
+		// Change la couleur du PushButton
+		void setButtonColor(QString);
 
-	void mute(bool);
-	void solo(bool);
+		// Charge une piste
+		void load(TrackData track);
+
+		// Active / désactive mute
+		void mute(bool);
+
+		// Active / désactive solo
+		void solo(bool);
+
 	signals:
 		void volumeChanged(int);
 		void panChanged(int);

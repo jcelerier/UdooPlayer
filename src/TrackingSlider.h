@@ -3,11 +3,9 @@
 
 #include <QSlider>
 #include <QMouseEvent>
-#include <QStyle>
 #include <QPainter>
-#include <QStyleOption>
-#include <QDebug>
 
+// Slider vertical personnalisé
 class TrackingSlider : public QSlider
 {
 		Q_OBJECT
@@ -27,9 +25,10 @@ class TrackingSlider : public QSlider
 		}
 
 	protected:
+		// Réimplémenté pour suivre le doigt
 		void mousePressEvent ( QMouseEvent * event );
 
-
+		// Réimplémenté pour afficher la petite barre à 0dB et le -oo
 		void paintEvent(QPaintEvent* ev);
 
 	private:
@@ -37,6 +36,7 @@ class TrackingSlider : public QSlider
 };
 
 
+// Slider horizontal encore plus personnalisé
 class PanSlider : public TrackingSlider
 {
 		Q_OBJECT
@@ -44,8 +44,8 @@ class PanSlider : public TrackingSlider
 	public:
 		using TrackingSlider::TrackingSlider;
 
-
 	protected:
+		// Réimplémenté pour afficher la petite barre au milieu et L, C, R
 		void paintEvent(QPaintEvent* ev)
 		{
 			QSlider::paintEvent(ev);
