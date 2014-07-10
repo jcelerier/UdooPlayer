@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z]1", RUN +="/bin/mount -o dmask=777,fmask=777 /dev/%k /media/song_usb", RUN+="/usr/local/bin/musique.sh"
