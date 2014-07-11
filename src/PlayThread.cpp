@@ -15,7 +15,6 @@
 PlayThread::PlayThread(QObject *parent) :
 	QThread(parent)
 {
-	conf.bufferSize = 1024;
 }
 
 void PlayThread::run()
