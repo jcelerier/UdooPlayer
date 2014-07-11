@@ -40,7 +40,7 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+=-lsndfile -lfftw3 -lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
+LIBS+=-lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive
