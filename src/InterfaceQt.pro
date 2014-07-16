@@ -22,7 +22,7 @@ SOURCES += main.cpp\
 	PlayThread.cpp \
 	SaveManager.cpp \
 	TrackingSlider.cpp \
-    SerialManager.cpp
+	SerialManager.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -32,7 +32,7 @@ HEADERS  += MainWindow.h \
 	SongData.h \
 	SaveManager.h \
 	TrackingSlider.h \
-    SerialManager.h
+	SerialManager.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
@@ -42,15 +42,15 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+=-lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
+LIBS+=-lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive
 LIBS += -lKF5Archive
 
 RESOURCES += \
-    Resources.qrc
+	Resources.qrc
 
 OTHER_FILES += \
-    TrackingSliderVerticalEnabled.qss \
-    TrackingSliderVerticalDisabled.qss
+	TrackingSliderVerticalEnabled.qss \
+	TrackingSliderVerticalDisabled.qss
