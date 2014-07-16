@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include "PlayThread.h"
-#include <SaveManager.h>
+#include "SaveManager.h"
+#include "SerialManager.h"
 #include <exception>
 
 namespace Ui {
@@ -52,6 +53,7 @@ class MainWidget : public QWidget
 		Ui::MainWidget *ui;
 		PlayThread playThread;
 		SaveManager savemanager;
+		SerialManager serialmanager;
 
 		int m_tempo{};
 		double m_beatCount{};

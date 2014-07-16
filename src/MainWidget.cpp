@@ -15,7 +15,7 @@ MainWidget::MainWidget(QWidget *parent) :
 	connect(ui->channelList, SIGNAL(muteChanged(int,bool)),
 			&playThread,	 SLOT(setMute(int,bool)));
 
-	connect(ui->masterVolume, SIGNAL(sliderMoved(int)),
+	connect(ui->masterVolume, SIGNAL(valueChanged(int)),
 			&playThread,	  SLOT(setMasterVolume(int)));
 
 	connect(&playThread,	&PlayThread::spentTime,
@@ -24,6 +24,7 @@ MainWidget::MainWidget(QWidget *parent) :
 			this,			&MainWidget::updateBeatCount);
 
 	ui->masterVolume->setDefaultValue(80);
+	serialmanager.start();
 }
 
 MainWidget::~MainWidget()
