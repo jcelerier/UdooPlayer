@@ -39,19 +39,21 @@ void MainWidget::play()
 	}
 
 	playThread.start();
+	m_playing = true;
 }
 
 void MainWidget::stop()
 {
-	if(!m_loaded) return;
+	if(!m_loaded || !m_playing) return;
 	playThread.stop();
-	m_previousBeat = -1;
+	m_previousBeat = 0;
+	m_playing = false;
 }
 
 void MainWidget::updateBeat(double t) // en secondes
 {
-	int time{t * getTempo() / 60.0};
-	if(time != m_previousBeat)
+	int time{t * getTempo() / 60.0 + 1};
+	if(time != m_previousBeat && time <= m_beatCount)
 	{
 		ui->temps->setText(QString("%1 / %2").arg(time)
 						   .arg(int(m_beatCount)));
@@ -87,6 +89,7 @@ int MainWidget::load()
 			ui->channelList->clear();
 			ui->channelList->load(song);
 			ui->masterVolume->setValue(80);
+			ui->morceau->setText(QString::fromStdString(song.name));
 		}
 
 		m_loaded = true;

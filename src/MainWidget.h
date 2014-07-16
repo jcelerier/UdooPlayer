@@ -61,6 +61,9 @@ class MainWidget : public QWidget
 
 		// Indique si un morceau a été chargé.
 		bool m_loaded{false};
+
+		// Indique si un morceau est en cours de lecture
+		bool m_playing{false};
 };
 
 #endif // MAINWIDGET_H

@@ -39,7 +39,6 @@
    </attribute>
    <addaction name="actionCharger"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionCharger">
    <property name="text">
     <string>Charger</string>

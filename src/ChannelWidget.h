@@ -29,12 +29,19 @@ class ChannelWidget : public QWidget
 		// Active / désactive solo
 		void solo(bool);
 
+		// Quand on active / désactive avec les boites
+		void enable(bool);
+
+
 	signals:
 		void volumeChanged(int);
 		void panChanged(int);
 
 		void on_mute(bool);
 		void on_solo(bool);
+
+	public slots:
+		void on_enable(bool);
 
 	private:
 		Ui::ChannelWidget *ui;

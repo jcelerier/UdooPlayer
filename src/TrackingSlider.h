@@ -5,6 +5,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 
+
+
+
 // Slider vertical personnalisé
 class TrackingSlider : public QSlider
 {
@@ -16,6 +19,24 @@ class TrackingSlider : public QSlider
 		int getDefaultValue() const
 		{
 			return m_defaultValue;
+		}
+
+		virtual void setEnabledStylesheet()
+		{
+			QFile file(":/qss/TrackingSliderVerticalEnabled.qss");
+			file.open(QFile::ReadOnly);
+			QString styleSheet = QLatin1String(file.readAll());
+			setStyleSheet(styleSheet);
+			ensurePolished();
+		}
+
+		virtual void setDisabledStylesheet()
+		{
+			QFile file(":/qss/TrackingSliderVerticalDisabled.qss");
+			file.open(QFile::ReadOnly);
+			QString styleSheet = QLatin1String(file.readAll());
+			setStyleSheet(styleSheet);
+			ensurePolished();
 		}
 
 	public slots:
@@ -48,8 +69,6 @@ class PanSlider : public TrackingSlider
 		// Réimplémenté pour afficher la petite barre au milieu et L, C, R
 		void paintEvent(QPaintEvent* ev)
 		{
-			QSlider::paintEvent(ev);
-
 			int h = this->size().height();
 			int w = this->size().width();
 
@@ -65,6 +84,7 @@ class PanSlider : public TrackingSlider
 			painter.drawText(2, 10, "L");
 			painter.drawText(w/2 - 4, 10, "C");
 			painter.drawText(w - 8, 10, "R");
+			QSlider::paintEvent(ev);
 		}
 };
 

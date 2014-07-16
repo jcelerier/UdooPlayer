@@ -22,6 +22,8 @@ ChannelWidget::ChannelWidget(QWidget *parent) :
 
 	ui->volume->setDefaultValue(80);
 	ui->pan->setDefaultValue(0);
+	enable(true);
+	on_enable(true); // Les signaux / slots ne sont pas encore dispos.
 }
 
 ChannelWidget::~ChannelWidget()
@@ -39,7 +41,6 @@ void ChannelWidget::load(TrackData track)
 	ui->button->setText(track.name.c_str());
 	ui->pan->setValue(track.pan);
 	ui->volume->setValue(track.volume);
-	qDebug() << track.volume;
 }
 
 void ChannelWidget::mute(bool muted)
@@ -50,4 +51,21 @@ void ChannelWidget::mute(bool muted)
 void ChannelWidget::solo(bool enabled)
 {
 	ui->solo->setChecked(enabled);
+}
+
+void ChannelWidget::enable(bool enabled)
+{
+	ui->button->setChecked(enabled);
+}
+
+void ChannelWidget::on_enable(bool enabled)
+{
+	if(enabled)
+	{
+		ui->volume->setEnabledStylesheet();
+	}
+	else
+	{
+		ui->volume->setDisabledStylesheet();
+	}
 }

@@ -1,6 +1,6 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
 
 TARGET = InterfaceQt
 TEMPLATE = app
@@ -21,7 +21,8 @@ SOURCES += main.cpp\
 	MainWidget.cpp \
 	PlayThread.cpp \
 	SaveManager.cpp \
-	TrackingSlider.cpp
+	TrackingSlider.cpp \
+    SerialManager.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -30,7 +31,8 @@ HEADERS  += MainWindow.h \
 	PlayThread.h \
 	SongData.h \
 	SaveManager.h \
-	TrackingSlider.h
+	TrackingSlider.h \
+    SerialManager.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
@@ -45,3 +47,10 @@ LIBS+=-lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive
 LIBS += -lKF5Archive
+
+RESOURCES += \
+    Resources.qrc
+
+OTHER_FILES += \
+    TrackingSliderVerticalEnabled.qss \
+    TrackingSliderVerticalDisabled.qss

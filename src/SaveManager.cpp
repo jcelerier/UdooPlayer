@@ -19,7 +19,6 @@ SongData SaveManager::load(QString loadpath)
 
 	//// Extraction de l'archive dans le dossier temp ////
 	KZip archive(loadpath);
-	qDebug() << loadpath;
 
 	if (!archive.open(QIODevice::ReadOnly))
 	{
@@ -44,6 +43,7 @@ SongData SaveManager::load(QString loadpath)
 
 	int count = settings.value("General/trackCount").toInt();
 	sd.tempo =  settings.value("General/tempo").toInt();
+	sd.name = settings.value("General/songName").toString().toStdString();
 	sd.tracks.reserve(count);
 
 	for(int i = 0; i < count; ++ i)
