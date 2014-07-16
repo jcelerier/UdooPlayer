@@ -14,6 +14,9 @@ class SerialManager : public QThread
 		{
 		}
 
+	public slots:
+		void readyReadSlot();
+
 	protected:
 		virtual void run();
 
