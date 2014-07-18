@@ -32,6 +32,11 @@ ChannelListWidget::~ChannelListWidget()
 	delete ui;
 }
 
+void ChannelListWidget::switchBox(int i)
+{
+	channels[i]->enable(!channels[i]->is_enabled());
+}
+
 void ChannelListWidget::clear()
 {
 	for(int i = 0; i < channels.size(); i++)

@@ -58,6 +58,11 @@ void ChannelWidget::enable(bool enabled)
 	ui->button->setChecked(enabled);
 }
 
+bool ChannelWidget::is_enabled()
+{
+	return ui->button->isChecked();
+}
+
 void ChannelWidget::on_enable(bool enabled)
 {
 	if(enabled)
@@ -68,4 +73,6 @@ void ChannelWidget::on_enable(bool enabled)
 	{
 		ui->volume->setDisabledStylesheet();
 	}
+
+	mute(!enabled);
 }

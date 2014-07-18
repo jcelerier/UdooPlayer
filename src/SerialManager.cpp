@@ -36,11 +36,11 @@ void SerialManager::run()
 
 			if(numRead == 0 && ! port->waitForReadyRead(20))
 			{
-				qDebug() << "fak";
+				qDebug() << "Erreur port série";
 				break;
 			}
-			//qDebug() << numRead;
-			if(numRead > 0) qDebug() << txt;
+
+			if(numRead > 0) emit boxActivated(QString(txt).simplified().replace(" ", "").toInt());
 		}
 	}
 }

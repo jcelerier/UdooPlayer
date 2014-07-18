@@ -25,6 +25,8 @@ class ChannelListWidget : public QWidget
 		void muteChanged(int, bool);
 
 	public slots:
+		void switchBox(int );
+
 		// Supprime toutes les pistes de l'interface
 		void clear();
 

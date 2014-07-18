@@ -53,7 +53,7 @@ class MainWidget : public QWidget
 		Ui::MainWidget *ui;
 		PlayThread playThread;
 		SaveManager savemanager;
-		SerialManager serialmanager;
+		SerialManager serialmanager{this};
 
 		int m_tempo{};
 		double m_beatCount{};

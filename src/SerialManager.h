@@ -8,25 +8,22 @@
 class QSerialPort;
 class SerialManager : public QThread
 {
+		Q_OBJECT
 	public:
 		QSerialPort* port;
-		SerialManager()
+		SerialManager(QObject* parent = 0):
+			QThread(parent)
 		{
 		}
+
+	signals:
+		void boxActivated(int);
 
 	public slots:
 		void readyReadSlot();
 
 	protected:
 		virtual void run();
-
-	private:
-		void parse(QString line)
-		{
-			auto tokens = line.split(" ");
-			qDebug() << tokens[2];
-		}
-
 };
 
 #endif // SERIALMANAGER_H
