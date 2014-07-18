@@ -32,6 +32,7 @@ class ChannelWidget : public QWidget
 		// Quand on active / désactive avec les boites
 		void enable(bool);
 
+		bool is_enabled();
 
 	signals:
 		void volumeChanged(int);

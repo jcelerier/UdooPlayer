@@ -23,6 +23,9 @@ MainWidget::MainWidget(QWidget *parent) :
 	connect(&playThread,	&PlayThread::setTotalTime,
 			this,			&MainWidget::updateBeatCount);
 
+	connect(&serialmanager,		&SerialManager::boxActivated,
+			ui->channelList,	&ChannelListWidget::switchBox);
+
 	ui->masterVolume->setDefaultValue(80);
 	serialmanager.start();
 }

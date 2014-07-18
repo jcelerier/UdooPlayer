@@ -30,17 +30,17 @@ void SerialManager::run()
 			if(port->canReadLine())
 			{
 				numRead = port->readLine(txt, 128);
-				qDebug() << txt;
+				//qDebug() << txt;
 			}
-			continue;
+			//continue;
 
 			if(numRead == 0 && ! port->waitForReadyRead(20))
 			{
-				qDebug() << "fak";
+				qDebug() << "Erreur port série";
 				break;
 			}
-			//qDebug() << numRead;
-			if(numRead > 0) qDebug() << txt;
+
+			if(numRead > 0) emit boxActivated(QString(txt).simplified().replace(" ", "").toInt());
 		}
 	}
 }
