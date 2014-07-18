@@ -1,23 +1,46 @@
 #include "SerialManager.h"
 
 #include <QtSerialPort/QtSerialPort>
+void SerialManager::readyReadSlot()
+{
+	while(!port->atEnd())
+	{
+		qDebug() << port->canReadLine();
+	}
+}
 void SerialManager::run()
 {
 	port = new QSerialPort("ttymxc3");
-	port->setBaudRate(115200);
 	port->open(QIODevice::ReadOnly);
+	port->setBaudRate(115200);
+	port->setDataBits(QSerialPort::Data8);
+	port->setParity(QSerialPort::NoParity);
+	port->setStopBits(QSerialPort::OneStop);
+	port->setFlowControl(QSerialPort::HardwareControl);
+
 	if(port->isOpen())
 	{
 		qDebug() << "Port ouvert";
-		QByteArray line;
+		char txt[128];
+		int numRead = 0;
 
 		forever
 		{
-			//if(port->canReadLine())
+			port->waitForReadyRead(100);
+			if(port->canReadLine())
 			{
-				qDebug() << "On a un truc à lire";
-				parse(QString(port->readLine(64)));
+				numRead = port->readLine(txt, 128);
+				qDebug() << txt;
 			}
+			continue;
+
+			if(numRead == 0 && ! port->waitForReadyRead(20))
+			{
+				qDebug() << "fak";
+				break;
+			}
+			//qDebug() << numRead;
+			if(numRead > 0) qDebug() << txt;
 		}
 	}
 }
