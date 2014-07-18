@@ -74,7 +74,7 @@ void checkSensors (int analogPin)
 
 		for(int pin=0; pin <= numPins; pin++)
 		{
-  //debug(pin, hitavg[pin]);
+
 			if(hitavg[pin] > v_max)
 			{
 				v_max = hitavg[pin] / num_iters;
@@ -92,7 +92,7 @@ void checkSensors (int analogPin)
 		{
 			if(PinPlayTime[i_max] == 0)
 			{
-				MIDI_TX(144, i_max, v_max);
+				debug(i_max);
 				PinPlayTime[i_max] = 1024;
 			}
 		}
@@ -102,10 +102,10 @@ void checkSensors (int analogPin)
 	}
 }
 
-void debug(int num, int avg)
+void debug(int num)
 {
 	char message[32];
-	sprintf(message, "Pad : %d     Val : %d \r\n", num, avg);
+	sprintf(message, "%d\r\n", num);
 	Serial.write(message);
 }
 
