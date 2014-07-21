@@ -3,7 +3,7 @@
 #include "ChannelWidget.h"
 
 #define CHANNEL_INDEX channels.indexOf(qobject_cast<ChannelWidget*>(QObject::sender()))
-
+using namespace std;
 ChannelListWidget::ChannelListWidget(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::ChannelListWidget)
@@ -97,17 +97,25 @@ void ChannelListWidget::on_soloChanged(bool isSoloed)
 		{
 			if(id != i)
 			{
-				channels[i]->mute(true);
-				channels[i]->solo(false);
+				if(!channels[i]->is_solo())
+				{
+					channels[i]->mute(true);
+					channels[i]->solo(false);
+				}
 			}
 		}
 		channels[id]->mute(false);
 	}
 	else
 	{
-		for(int i = 0; i < channels.size(); i++)
-		{
-			channels[i]->mute(false);
-		}
+		if(!std::any_of(begin(channels),
+					   end(channels),
+					   [] (ChannelWidget* chan) { return chan->is_solo(); }))
+			for(int i = 0; i < channels.size(); i++)
+			{
+				channels[i]->mute(false);
+			}
+		else
+			channels[id]->mute(true);
 	}
 }

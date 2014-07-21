@@ -76,3 +76,15 @@ void ChannelWidget::on_enable(bool enabled)
 
 	mute(!enabled);
 }
+
+
+bool ChannelWidget::is_solo()
+{
+	return ui->solo->isChecked();
+}
+
+bool ChannelWidget::is_mute()
+{
+	return ui->mute->isChecked();
+}
+

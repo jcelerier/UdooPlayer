@@ -34,6 +34,10 @@ class ChannelWidget : public QWidget
 
 		bool is_enabled();
 
+		bool is_solo();
+		bool is_mute();
+
+
 	signals:
 		void volumeChanged(int);
 		void panChanged(int);
