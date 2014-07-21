@@ -5,11 +5,12 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-
-#include <QDebug>
-
-// Slider vertical personnalisé
-class TrackingSlider : public QSlider
+/**
+ * @brief The TrackingSlider class
+ *
+ * Slider vertical personnalisé
+ */
+ class TrackingSlider : public QSlider
 {
 		Q_OBJECT
 		Q_PROPERTY(int defaultValue READ getDefaultValue WRITE setDefaultValue)
@@ -31,7 +32,6 @@ class TrackingSlider : public QSlider
 			else
 			{
 				file.setFileName(":/qss/TrackingSliderHorizontalEnabled.qss");
-				qDebug() << "\n\n\n\n\n\n\n\nWE ARE HERE\n\n\n\n\n\n\n\n";
 			}
 			file.open(QFile::ReadOnly);
 			setStyleSheet(file.readAll());

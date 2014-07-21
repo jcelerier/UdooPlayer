@@ -15,6 +15,11 @@
 template<typename T>
 class StreamingManager;
 
+/**
+ * @brief The PlayThread class
+ *
+ * Classe qui fait la liaison avec le moteur audio
+ */
 class PlayThread : public QThread
 {
 		Q_OBJECT
@@ -65,7 +70,7 @@ class PlayThread : public QThread
 		}
 
 		// Charge un morceau dans le moteur
-		void load(SongData s);
+		void load(const SongData& s);
 
 		// Arrête la lecture
 		void stop();
@@ -76,7 +81,6 @@ class PlayThread : public QThread
 		std::vector<std::shared_ptr<Amplify<double>>> volumes;
 		std::vector<std::shared_ptr<Pan<double>>> pans;
 		std::vector<std::shared_ptr<Mute<double>>> mutes;
-
 		std::shared_ptr<StreamingManager<double>> manager;
 
 		// Buffer auquel on se trouve

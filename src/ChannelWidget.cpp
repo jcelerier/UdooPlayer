@@ -31,12 +31,12 @@ ChannelWidget::~ChannelWidget()
 	delete ui;
 }
 
-void ChannelWidget::setButtonColor(QString hex)
+void ChannelWidget::setButtonColor(const QString hex)
 {
 	ui->button->setStyleSheet("background-color: " + hex);
 }
 
-void ChannelWidget::load(TrackData track)
+void ChannelWidget::load(const TrackData& track)
 {
 	ui->button->setText(track.name.c_str());
 	ui->pan->setValue(track.pan);
@@ -58,7 +58,7 @@ void ChannelWidget::enable(bool enabled)
 	ui->button->setChecked(enabled);
 }
 
-bool ChannelWidget::is_enabled()
+bool ChannelWidget::is_enabled() const
 {
 	return ui->button->isChecked();
 }
@@ -78,12 +78,12 @@ void ChannelWidget::slot_enable(bool enabled)
 }
 
 
-bool ChannelWidget::is_solo()
+bool ChannelWidget::is_solo() const
 {
 	return ui->solo->isChecked();
 }
 
-bool ChannelWidget::is_mute()
+bool ChannelWidget::is_mute() const
 {
 	return ui->mute->isChecked();
 }

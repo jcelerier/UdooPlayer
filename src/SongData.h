@@ -6,7 +6,13 @@
 struct TrackData
 {
 		TrackData() = default;
-		TrackData(std::string n, std::string f, double v, double p):
+		TrackData(TrackData&&) = default;
+		TrackData(const TrackData&) = delete;
+
+		TrackData(const std::string n,
+				  const std::string f,
+				  const double v,
+				  const double p):
 			name(n),
 			file(f),
 			volume(v),
@@ -15,15 +21,19 @@ struct TrackData
 
 		}
 
-		std::string name;
-		std::string file;
-		double volume;
-		double pan;
+		TrackData& operator=(TrackData&&) = default;
+		TrackData& operator=(const TrackData&) = delete;
+		const std::string name;
+		const std::string file;
+		const double volume;
+		const double pan;
 };
 
 // Information pour le morceau entier
 struct SongData
 {
+		SongData() = default;
+		SongData(SongData&&) = default;
 		std::vector<TrackData> tracks{};
 		int tempo{};
 		std::string name{};

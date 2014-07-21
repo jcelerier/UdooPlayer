@@ -31,7 +31,7 @@ void PlayThread::stop()
 	bufferCount = 0;
 }
 
-void PlayThread::load(SongData s)
+void PlayThread::load(const SongData& s)
 {
 	//// Remise à 0
 	bufferCount = 0;

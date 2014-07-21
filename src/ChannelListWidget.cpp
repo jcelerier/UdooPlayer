@@ -11,13 +11,6 @@ ChannelListWidget::ChannelListWidget(QWidget *parent) :
 	ui->setupUi(this);
 
 	/*
-	for(int i = 0; i < 8; i++)
-	{
-		channels << new ChannelWidget(this);
-		ui->horizontalLayout->addWidget(channels.last());
-	}
-	*/
-	/*
 	ui->widget->setButtonColor("#FF0000");
 	ui->widget_2->setButtonColor("#00FF00");
 	ui->widget_3->setButtonColor("#0000FF");
@@ -50,7 +43,7 @@ void ChannelListWidget::clear()
 	channels.resize(0);
 }
 
-void ChannelListWidget::load(SongData s)
+void ChannelListWidget::load(const SongData& s)
 {
 	for(auto& track : s.tracks)
 	{
@@ -88,6 +81,7 @@ void ChannelListWidget::on_muteChanged(bool mute)
 		emit muteChanged(CHANNEL_INDEX, true);
 	}
 }
+
 void ChannelListWidget::on_enablementChanged(bool enabled)
 {
 	if(enabled && !channels[CHANNEL_INDEX]->is_mute())

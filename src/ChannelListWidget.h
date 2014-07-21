@@ -10,6 +10,11 @@ namespace Ui {
 
 class ChannelWidget;
 
+/**
+ * @brief The ChannelListWidget class
+ *
+ * La liste des pistes
+ */
 class ChannelListWidget : public QWidget
 {
 		Q_OBJECT
@@ -25,19 +30,21 @@ class ChannelListWidget : public QWidget
 		void muteChanged(int, bool);
 
 	public slots:
-		void switchBox(int );
+		// Appelé lorsqu'une boite est tapée
+		void switchBox(int);
 
 		// Supprime toutes les pistes de l'interface
 		void clear();
 
 		// Charge un nouveau jeu de pistes
-		void load(SongData s);
+		void load(const SongData& s);
 
+		// Appelés lorsqu'un paramètre change dans une des pistes
 		void on_volumeChanged(int);
 		void on_panChanged(int);
 		void on_muteChanged(bool);
 		void on_soloChanged(bool);
-		void on_enablementChanged(bool);
+		void on_enablementChanged(bool); // Bouton contrôlé par les boîtes
 
 	private:
 		Ui::ChannelListWidget *ui;

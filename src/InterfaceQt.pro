@@ -4,11 +4,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
 
 TARGET = InterfaceQt
 TEMPLATE = app
-CONFIG += c++11
+
+QMAKE_CXXFLAGS += -std=c++1y
 
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_LFLAGS_RELEASE -= -O1
-QMAKE_CXXFLAGS_RELEASE += -O3 -fopenmp -march=native
+QMAKE_CXXFLAGS_RELEASE += -O3 -march=native
 
 QMAKE_CXXFLAGS_DEBUG -= -O1
 QMAKE_CXXFLAGS_DEBUG -= -O2
@@ -42,7 +43,7 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+=-lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
+LIBS+= -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive
@@ -54,5 +55,5 @@ RESOURCES += \
 OTHER_FILES += \
 	TrackingSliderVerticalEnabled.qss \
 	TrackingSliderVerticalDisabled.qss \
-    TrackingSliderHorizontalEnabled.qss \
-    TrackingSliderHorizontalDisabled.qss
+	TrackingSliderHorizontalEnabled.qss \
+	TrackingSliderHorizontalDisabled.qss

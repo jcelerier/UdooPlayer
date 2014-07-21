@@ -8,9 +8,13 @@ void SerialManager::readyReadSlot()
 		qDebug() << port->canReadLine();
 	}
 }
+
 void SerialManager::run()
 {
+	// Ouverture du bon port
 	port = new QSerialPort("ttymxc3");
+
+	// Configuration
 	port->open(QIODevice::ReadOnly);
 	port->setBaudRate(115200);
 	port->setDataBits(QSerialPort::Data8);
@@ -20,9 +24,8 @@ void SerialManager::run()
 
 	if(port->isOpen())
 	{
-		qDebug() << "Port ouvert";
 		char txt[128];
-		int numRead = 0;
+		int numRead;
 
 		forever
 		{
@@ -31,17 +34,7 @@ void SerialManager::run()
 			{
 				numRead = port->readLine(txt, 128);
 				if(numRead > 0) emit boxActivated(QString(txt).simplified().replace(" ", "").toInt());
-				//qDebug() << txt;
 			}
-			//continue;
-
-			//if(numRead == 0 && ! port->waitForReadyRead(20))
-			//{
-			//	qDebug() << "Erreur port série";
-			//	break;
-			//}
-
-
 		}
 	}
 }

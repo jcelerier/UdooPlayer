@@ -12,6 +12,11 @@ namespace Ui {
 }
 
 class SaveManager;
+/**
+ * @brief The MainWidget class
+ *
+ * L'écran principal
+ */
 class MainWidget : public QWidget
 {
 		Q_OBJECT

@@ -9,6 +9,11 @@ namespace Ui {
 }
 
 class ChannelListWidget;
+/**
+ * @brief The ChannelWidget class
+ *
+ * Une piste
+ */
 class ChannelWidget : public QWidget
 {
 		Q_OBJECT
@@ -18,10 +23,10 @@ class ChannelWidget : public QWidget
 		~ChannelWidget();
 
 		// Change la couleur du PushButton
-		void setButtonColor(QString);
+		void setButtonColor(const QString);
 
 		// Charge une piste
-		void load(TrackData track);
+		void load(const TrackData& track);
 
 		// Active / désactive mute
 		void mute(bool);
@@ -32,10 +37,14 @@ class ChannelWidget : public QWidget
 		// Quand on active / désactive avec les boites
 		void enable(bool);
 
-		bool is_enabled();
+		// Renvoie vrai si la boite est en mode "ON"
+		bool is_enabled() const;
 
-		bool is_solo();
-		bool is_mute();
+		// Renvoie vrai si solo est activé
+		bool is_solo() const;
+
+		// Renvoie vrai si mute est activé
+		bool is_mute() const;
 
 
 	signals:
@@ -47,6 +56,7 @@ class ChannelWidget : public QWidget
 		void on_enable(bool);
 
 	public slots:
+		// Appelé lorsqu'on tape sur la boite
 		void slot_enable(bool);
 
 	private:

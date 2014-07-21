@@ -12,7 +12,7 @@ SaveManager::SaveManager(QObject *parent) :
 {
 }
 
-SongData SaveManager::load(QString loadpath)
+SongData SaveManager::load(const QString loadpath)
 {
 	//// Création d'un dossier temporaire ////
 	tempdir.reset(new QTemporaryDir);
@@ -44,12 +44,11 @@ SongData SaveManager::load(QString loadpath)
 	int count = settings.value("General/trackCount").toInt();
 	sd.tempo =  settings.value("General/tempo").toInt();
 	sd.name = settings.value("General/songName").toString().toStdString();
-	sd.tracks.reserve(count);
+//	sd.tracks.reserve(count);
 
 	for(int i = 0; i < count; ++ i)
 	{
-		sd.tracks.emplace(sd.tracks.begin() + i,
-						  settings.value(QString("Track%1/name").arg(i)).toString().toStdString(),
+		sd.tracks.emplace_back(settings.value(QString("Track%1/name").arg(i)).toString().toStdString(),
 						  (tempdir->path() + "/" + settings.value(QString("Track%1/filename").arg(i)).toString()).toStdString(),
 						  settings.value(QString("Track%1/volume").arg(i)).toInt(),
 						  settings.value(QString("Track%1/pan").arg(i)).toInt());

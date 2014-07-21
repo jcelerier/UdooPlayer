@@ -6,19 +6,24 @@
 #include <QTemporaryDir>
 #include <memory>
 #include <SongData.h>
+
+/**
+ * @brief The SaveManager class
+ *
+ * Ouverture des fichiers de sauvegarde
+ *
+ */
 class SaveManager : public QObject
 {
 		Q_OBJECT
 	public:
 		explicit SaveManager(QObject *parent = 0);
 
-		// Dossier temporaire ou sont extraits les .song
+		// Dossier temporaire ou sont extraits les données contenues dans les fichiers .song
 		std::shared_ptr<QTemporaryDir> tempdir{};
 
-
-	public slots:
 		// Charge un fichier
-		SongData load(QString name);
+		SongData load(const QString name);
 
 };
 

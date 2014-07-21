@@ -6,6 +6,11 @@
 #include <QDebug>
 
 class QSerialPort;
+/**
+ * @brief The SerialManager class
+ *
+ * Interface avec le port série, pour recevoir les messages de l'Arduino
+ */
 class SerialManager : public QThread
 {
 		Q_OBJECT
@@ -17,6 +22,7 @@ class SerialManager : public QThread
 		}
 
 	signals:
+		// Envoyé lorsqu'une boite est activée
 		void boxActivated(int);
 
 	public slots:

@@ -86,7 +86,7 @@ int MainWidget::load()
 													"Musique (*.song)");
 		if(!file.isEmpty())
 		{
-			SongData song = savemanager.load(file);
+			SongData song{savemanager.load(file)};
 			setTempo(song.tempo);
 
 			playThread.load(song);
