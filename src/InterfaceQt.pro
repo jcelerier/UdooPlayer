@@ -8,7 +8,7 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++1y
 
 QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -Ofast -march=native -flto
+QMAKE_CXXFLAGS_RELEASE += -Ofast -march=native -flto -fopenmp
 QMAKE_LFLAGS_RELEASE -= -Wl,-O1
 QMAKE_LFLAGS_RELEASE += -Wl,-O3 -Wl,-flto
 
@@ -44,7 +44,7 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+= -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
+LIBS+= -lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive

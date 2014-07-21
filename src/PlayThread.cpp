@@ -41,18 +41,24 @@ void PlayThread::load(const SongData& s)
 	mutes.clear();
 	manager.reset();
 
+	volumes.resize(track_count);
+	pans.resize(track_count);
+	mutes.resize(track_count);
+
 	//// Chargement
-	std::vector<Input_p> chains;
+	std::vector<Input_p> chains(track_count);
+
+	#pragma omp parallel for
 	for(int i = 0; i < track_count; i++)
 	{
-		volumes.push_back(std::make_shared<Amplify<double>>(conf));
-		pans.push_back(std::make_shared<Pan<double>>(conf));
-		mutes.push_back(std::make_shared<Mute<double>>(conf));
+		volumes[i] = std::make_shared<Amplify<double>>(conf);
+		pans[i] = std::make_shared<Pan<double>>(conf);
+		mutes[i] = std::make_shared<Mute<double>>(conf);
 
 		auto file = new FFMPEGFileInput<double>(s.tracks[i].file, conf);
 		maxBufferCount = file->v(0).size() / conf.bufferSize;
 		emit setTotalTime(file->v(0).size() / double(conf.samplingRate));
-		chains.emplace_back(new SfxInputProxy<double>(new StereoAdapter<double>(new LoopInputProxy<double>(file)),
+		chains[i] = Input_p(new SfxInputProxy<double>(new StereoAdapter<double>(new LoopInputProxy<double>(file)),
 													  new Sequence<double>(conf, volumes[i], pans[i], mutes[i])));
 	}
 
