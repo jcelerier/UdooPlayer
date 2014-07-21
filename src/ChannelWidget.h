@@ -44,9 +44,10 @@ class ChannelWidget : public QWidget
 
 		void on_mute(bool);
 		void on_solo(bool);
+		void on_enable(bool);
 
 	public slots:
-		void on_enable(bool);
+		void slot_enable(bool);
 
 	private:
 		Ui::ChannelWidget *ui;

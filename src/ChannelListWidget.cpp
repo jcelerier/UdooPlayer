@@ -10,11 +10,13 @@ ChannelListWidget::ChannelListWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	/*
 	for(int i = 0; i < 8; i++)
 	{
 		channels << new ChannelWidget(this);
 		ui->horizontalLayout->addWidget(channels.last());
 	}
+	*/
 	/*
 	ui->widget->setButtonColor("#FF0000");
 	ui->widget_2->setButtonColor("#00FF00");
@@ -59,6 +61,7 @@ void ChannelListWidget::load(SongData s)
 		connect(channels.last(), SIGNAL(panChanged(int)), this, SLOT(on_panChanged(int)));
 		connect(channels.last(), SIGNAL(on_mute(bool)), this, SLOT(on_muteChanged(bool)));
 		connect(channels.last(), SIGNAL(on_solo(bool)), this, SLOT(on_soloChanged(bool)));
+		connect(channels.last(), SIGNAL(on_enable(bool)), this, SLOT(on_enablementChanged(bool)));
 
 		channels.last()->load(track);
 	}
@@ -74,9 +77,27 @@ void ChannelListWidget::on_panChanged(int vol)
 	emit panChanged(CHANNEL_INDEX, vol);
 }
 
-void ChannelListWidget::on_muteChanged(bool b)
+void ChannelListWidget::on_muteChanged(bool mute)
 {
-	emit muteChanged(CHANNEL_INDEX, b);
+	if(!mute && channels[CHANNEL_INDEX]->is_enabled())
+	{
+		emit muteChanged(CHANNEL_INDEX, false);
+	}
+	else
+	{
+		emit muteChanged(CHANNEL_INDEX, true);
+	}
+}
+void ChannelListWidget::on_enablementChanged(bool enabled)
+{
+	if(enabled && !channels[CHANNEL_INDEX]->is_mute())
+	{
+		emit muteChanged(CHANNEL_INDEX, false);
+	}
+	else
+	{
+		emit muteChanged(CHANNEL_INDEX, true);
+	}
 }
 
 /**

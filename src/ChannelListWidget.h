@@ -37,6 +37,7 @@ class ChannelListWidget : public QWidget
 		void on_panChanged(int);
 		void on_muteChanged(bool);
 		void on_soloChanged(bool);
+		void on_enablementChanged(bool);
 
 	private:
 		Ui::ChannelListWidget *ui;

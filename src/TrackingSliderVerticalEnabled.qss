@@ -10,7 +10,7 @@ QSlider::groove:vertical
 QSlider::handle:vertical
 {
 	height: 20px;
-	background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4ffb4, stop:1 #8fdd8f);;
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4ffb4, stop:1 #8fdd8f);
 	border: 1px solid #777;
 	border-radius: 7px;
 	margin-left:4px;

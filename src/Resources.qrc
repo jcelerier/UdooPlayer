@@ -2,5 +2,6 @@
     <qresource prefix="/qss">
         <file>TrackingSliderVerticalEnabled.qss</file>
         <file>TrackingSliderVerticalDisabled.qss</file>
+        <file>TrackingSliderHorizontalEnabled.qss</file>
     </qresource>
 </RCC>

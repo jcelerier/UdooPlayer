@@ -6,7 +6,7 @@
 #include <QPainter>
 
 
-
+#include <QDebug>
 
 // Slider vertical personnalisé
 class TrackingSlider : public QSlider
@@ -23,19 +23,35 @@ class TrackingSlider : public QSlider
 
 		virtual void setEnabledStylesheet()
 		{
-			QFile file(":/qss/TrackingSliderVerticalEnabled.qss");
+			QFile file;
+			if(orientation() == Qt::Vertical)
+			{
+				file.setFileName(":/qss/TrackingSliderVerticalEnabled.qss");
+			}
+			else
+			{
+				file.setFileName(":/qss/TrackingSliderHorizontalEnabled.qss");
+				qDebug() << "\n\n\n\n\n\n\n\nWE ARE HERE\n\n\n\n\n\n\n\n";
+			}
 			file.open(QFile::ReadOnly);
-			QString styleSheet = QLatin1String(file.readAll());
-			setStyleSheet(styleSheet);
+			setStyleSheet(file.readAll());
 			ensurePolished();
 		}
 
 		virtual void setDisabledStylesheet()
 		{
-			QFile file(":/qss/TrackingSliderVerticalDisabled.qss");
+			QFile file;
+			if(orientation() == Qt::Vertical)
+			{
+				file.setFileName(":/qss/TrackingSliderVerticalDisabled.qss");
+			}
+			else
+			{
+				file.setFileName(":/qss/TrackingSliderHorizontalDisabled.qss");
+			}
+
 			file.open(QFile::ReadOnly);
-			QString styleSheet = QLatin1String(file.readAll());
-			setStyleSheet(styleSheet);
+			setStyleSheet(file.readAll());
 			ensurePolished();
 		}
 

@@ -27,6 +27,7 @@ MainWidget::MainWidget(QWidget *parent) :
 			ui->channelList,	&ChannelListWidget::switchBox);
 
 	ui->masterVolume->setDefaultValue(80);
+	ui->masterVolume->setEnabledStylesheet();
 	serialmanager.start();
 }
 

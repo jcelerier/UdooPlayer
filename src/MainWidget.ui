@@ -184,49 +184,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">QSlider {
-margin-left:4px;
-margin-right:4px;
-}
-QSlider::groove:horizontal{
-position: absolute; /* absolutely position 4px from the left and right of the widget. setting margins on the widget should work too... */
-     top: 2;
-     bottom: 2;
-border:0;
-}
-
- QSlider::handle:horizontal {
-width:20px;
-     background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);;
-     border: 1px solid #777;
-     border-radius: 7px;
-margin-top:0px;
-
-margin-bottom:0px;
- }
-
- QSlider::add-page:horizontal {
-	 background: #eee;
-	 border: 1px solid #bbb;
-margin-top:4px;
-
-margin-bottom:4px;
-	top:4px;
-	bottom:4px;
-position:absolute;
- }
-
- QSlider::sub-page:horizontal {
-	 background: #ccc;
-	 border: 1px solid #bbb;
-margin-top:4px;
-
-margin-bottom:4px;
-
-	top:4px;
-	bottom:4px;
-position:absolute;
- }</string>
+          <string notr="true"/>
          </property>
          <property name="maximum">
           <number>100</number>
@@ -236,6 +194,13 @@ position:absolute;
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Master</string>
          </property>
         </widget>
        </item>

@@ -53,4 +53,6 @@ RESOURCES += \
 
 OTHER_FILES += \
 	TrackingSliderVerticalEnabled.qss \
-	TrackingSliderVerticalDisabled.qss
+	TrackingSliderVerticalDisabled.qss \
+    TrackingSliderHorizontalEnabled.qss \
+    TrackingSliderHorizontalDisabled.qss

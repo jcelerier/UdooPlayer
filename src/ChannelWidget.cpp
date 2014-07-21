@@ -17,13 +17,13 @@ ChannelWidget::ChannelWidget(QWidget *parent) :
 	connect(ui->mute,	SIGNAL(toggled(bool)),
 			this,		SIGNAL(on_mute(bool)));
 
-	connect(ui->solo,	SIGNAL(clicked(bool)),
+	connect(ui->solo,	SIGNAL(toggled(bool)),
 			this,		SIGNAL(on_solo(bool)));
 
 	ui->volume->setDefaultValue(80);
 	ui->pan->setDefaultValue(0);
 	enable(true);
-	on_enable(true); // Les signaux / slots ne sont pas encore dispos.
+	slot_enable(true); // Les signaux / slots ne sont pas encore dispos.
 }
 
 ChannelWidget::~ChannelWidget()
@@ -63,7 +63,7 @@ bool ChannelWidget::is_enabled()
 	return ui->button->isChecked();
 }
 
-void ChannelWidget::on_enable(bool enabled)
+void ChannelWidget::slot_enable(bool enabled)
 {
 	if(enabled)
 	{
@@ -74,7 +74,7 @@ void ChannelWidget::on_enable(bool enabled)
 		ui->volume->setDisabledStylesheet();
 	}
 
-	mute(!enabled);
+	emit on_enable(enabled);
 }
 
 

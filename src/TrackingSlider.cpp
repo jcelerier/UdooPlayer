@@ -21,7 +21,6 @@ void TrackingSlider::mousePressEvent(QMouseEvent* event)
 		setValue(getDefaultValue());
 	}
 }
-#include<QDebug>
 
 // http://qt-project.org/faq/answer/how_can_i_draw_custom_subcontrols_for_a_complex_control
 // http://stackoverflow.com/questions/17101378/coloring-qslider-for-particular-range
