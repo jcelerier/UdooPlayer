@@ -23,10 +23,10 @@ struct TrackData
 
 		TrackData& operator=(TrackData&&) = default;
 		TrackData& operator=(const TrackData&) = delete;
-		const std::string name;
-		const std::string file;
-		const double volume;
-		const double pan;
+		const std::string name{};
+		const std::string file{};
+		const double volume{};
+		const double pan{};
 };
 
 // Information pour le morceau entier
