@@ -5,6 +5,7 @@
 #include "PlayThread.h"
 #include "SaveManager.h"
 #include "SerialManager.h"
+#include "ConfigurationDialog.h"
 #include <exception>
 
 namespace Ui {
@@ -32,12 +33,22 @@ class MainWidget : public QWidget
 			return m_tempo;
 		}
 
+	signals:
+		void reset();
+		void openConfDialog();
+
 	public slots:
+		// Active / désactive une boite
+		void switchBox(int, int);
+
 		// Lance la lecture
 		void play();
 
 		// Charge un morceau
 		int load();
+
+		// Sauve les modifications
+		void save();
 
 		// S'arrête
 		void stop();
@@ -59,6 +70,9 @@ class MainWidget : public QWidget
 		PlayThread playThread;
 		SaveManager savemanager;
 		SerialManager serialmanager{this};
+		ConfigurationDialog confdialog{this};
+
+		QString currentFile{};
 
 		int m_tempo{};
 		double m_beatCount{};

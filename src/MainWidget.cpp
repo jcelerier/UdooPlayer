@@ -3,6 +3,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <ChannelWidget.h>
 MainWidget::MainWidget(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::MainWidget)
@@ -24,7 +25,13 @@ MainWidget::MainWidget(QWidget *parent) :
 			this,			&MainWidget::updateBeatCount);
 
 	connect(&serialmanager,		&SerialManager::boxActivated,
-			ui->channelList,	&ChannelListWidget::switchBox);
+			this,				&MainWidget::switchBox);
+
+	connect(this,			 &MainWidget::reset,
+			ui->channelList, &ChannelListWidget::reset);
+
+	connect(this,		 &MainWidget::openConfDialog,
+			&confdialog, &ConfigurationDialog::exec);
 
 	ui->masterVolume->setDefaultValue(80);
 	ui->masterVolume->setEnabledStylesheet();
@@ -34,6 +41,12 @@ MainWidget::MainWidget(QWidget *parent) :
 MainWidget::~MainWidget()
 {
 	delete ui;
+}
+
+void MainWidget::switchBox(int i, int val)
+{
+	if(val > confdialog.threshold)
+		ui->channelList->switchBox(i);
 }
 
 void MainWidget::play()
@@ -84,8 +97,11 @@ int MainWidget::load()
 													"Charger",
 													"/home/ubuntu/songs", // Hardcodé
 													"Musique (*.song)");
+
+		qDebug() << file << file.isEmpty();
 		if(!file.isEmpty())
 		{
+			currentFile = file;
 			SongData song{savemanager.load(file)};
 			setTempo(song.tempo);
 
@@ -95,9 +111,12 @@ int MainWidget::load()
 			ui->channelList->load(song);
 			ui->masterVolume->setValue(80);
 			ui->morceau->setText(QString::fromStdString(song.name));
-		}
 
-		m_loaded = true;
+			m_loaded = true;
+
+			return 0;
+		}
+		return 1;
 	}
 	catch(std::exception& e)
 	{
@@ -105,5 +124,10 @@ int MainWidget::load()
 		return 1;
 	}
 
-	return 0;
+	return 1;
+}
+
+void MainWidget::save()
+{
+	savemanager.save(currentFile, this);
 }

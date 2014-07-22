@@ -36,6 +36,9 @@ class ChannelListWidget : public QWidget
 		// Supprime toutes les pistes de l'interface
 		void clear();
 
+		// Remet volumes et pans à leur valeur par défaut
+		void reset();
+
 		// Charge un nouveau jeu de pistes
 		void load(const SongData& s);
 

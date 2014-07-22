@@ -43,6 +43,14 @@ void ChannelListWidget::clear()
 	channels.resize(0);
 }
 
+void ChannelListWidget::reset()
+{
+	for(auto& chan : channels)
+	{
+		chan->reset();
+	}
+}
+
 void ChannelListWidget::load(const SongData& s)
 {
 	for(auto& track : s.tracks)

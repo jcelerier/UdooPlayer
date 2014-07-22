@@ -56,10 +56,33 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionCharger"/>
+   <addaction name="actionSauvegarder"/>
+   <addaction name="separator"/>
+   <addaction name="actionReset"/>
+   <addaction name="separator"/>
+   <addaction name="actionConfiguration"/>
   </widget>
   <action name="actionCharger">
    <property name="text">
     <string>Charger</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder">
+   <property name="text">
+    <string>Sauvegarder</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionConfiguration">
+   <property name="text">
+    <string>Configuration</string>
    </property>
   </action>
  </widget>
@@ -93,6 +116,22 @@
     <hint type="destinationlabel">
      <x>309</x>
      <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSauvegarder</sender>
+   <signal>triggered()</signal>
+   <receiver>centralWidget</receiver>
+   <slot>save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>258</y>
     </hint>
    </hints>
   </connection>

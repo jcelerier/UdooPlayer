@@ -88,7 +88,7 @@ QPushButton:pressed {background-color: #00FF00;}</string>
     </widget>
    </item>
    <item alignment="Qt::AlignHCenter">
-    <widget class="TrackingSlider" name="volume">
+    <widget class="VolumeSlider" name="volume">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -277,12 +277,12 @@ QPushButton:pressed {background-color: #00FFFF;}</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TrackingSlider</class>
+   <class>PanSlider</class>
    <extends>QSlider</extends>
    <header>TrackingSlider.h</header>
   </customwidget>
   <customwidget>
-   <class>PanSlider</class>
+   <class>VolumeSlider</class>
    <extends>QSlider</extends>
    <header>TrackingSlider.h</header>
   </customwidget>

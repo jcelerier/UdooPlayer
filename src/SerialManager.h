@@ -23,7 +23,7 @@ class SerialManager : public QThread
 
 	signals:
 		// Envoyé lorsqu'une boite est activée
-		void boxActivated(int);
+		void boxActivated(int, int);
 
 	public slots:
 		void readyReadSlot();

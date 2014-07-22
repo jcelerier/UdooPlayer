@@ -13,6 +13,7 @@
  * Ouverture des fichiers de sauvegarde
  *
  */
+class MainWidget;
 class SaveManager : public QObject
 {
 		Q_OBJECT
@@ -24,6 +25,9 @@ class SaveManager : public QObject
 
 		// Charge un fichier
 		SongData load(const QString name);
+
+		// Utilisé pour sauvegarder les paramètres de vol / pan..
+		void save(const QString name, MainWidget* manager);
 
 };
 

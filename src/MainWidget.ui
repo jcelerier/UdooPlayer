@@ -176,7 +176,7 @@
         </widget>
        </item>
        <item>
-        <widget class="TrackingSlider" name="masterVolume">
+        <widget class="VolumeSlider" name="masterVolume">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -212,7 +212,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TrackingSlider</class>
+   <class>VolumeSlider</class>
    <extends>QSlider</extends>
    <header>TrackingSlider.h</header>
   </customwidget>

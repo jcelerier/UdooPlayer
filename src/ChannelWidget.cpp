@@ -88,3 +88,9 @@ bool ChannelWidget::is_mute() const
 	return ui->mute->isChecked();
 }
 
+void ChannelWidget::reset()
+{
+	ui->volume->setValue(ui->volume->getDefaultValue());
+	ui->pan->setValue(ui->pan->getDefaultValue());
+}
+

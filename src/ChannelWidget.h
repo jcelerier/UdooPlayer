@@ -19,6 +19,8 @@ class ChannelWidget : public QWidget
 		Q_OBJECT
 		friend class ChannelListWidget;
 	public:
+		Ui::ChannelWidget *ui;
+
 		explicit ChannelWidget(QWidget *parent = 0);
 		~ChannelWidget();
 
@@ -46,6 +48,8 @@ class ChannelWidget : public QWidget
 		// Renvoie vrai si mute est activé
 		bool is_mute() const;
 
+		// Remet volume et pan par défaut
+		void reset();
 
 	signals:
 		void volumeChanged(int);
@@ -59,8 +63,6 @@ class ChannelWidget : public QWidget
 		// Appelé lorsqu'on tape sur la boite
 		void slot_enable(bool);
 
-	private:
-		Ui::ChannelWidget *ui;
 };
 
 #endif // CHANNELWIDGET_H

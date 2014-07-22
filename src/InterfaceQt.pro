@@ -24,7 +24,8 @@ SOURCES += main.cpp\
 	PlayThread.cpp \
 	SaveManager.cpp \
 	TrackingSlider.cpp \
-	SerialManager.cpp
+	SerialManager.cpp \
+    ConfigurationDialog.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -34,12 +35,14 @@ HEADERS  += MainWindow.h \
 	SongData.h \
 	SaveManager.h \
 	TrackingSlider.h \
-	SerialManager.h
+	SerialManager.h \
+    ConfigurationDialog.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
 	ChannelListWidget.ui \
-	MainWidget.ui
+	MainWidget.ui \
+    ConfigurationDialog.ui
 
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark

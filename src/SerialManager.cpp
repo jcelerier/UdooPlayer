@@ -33,7 +33,8 @@ void SerialManager::run()
 			if(port->canReadLine())
 			{
 				numRead = port->readLine(txt, 128);
-				if(numRead > 0) emit boxActivated(QString(txt).simplified().replace(" ", "").toInt());
+				auto msg = QString(txt).simplified().split(' ');
+				if(numRead > 0) emit boxActivated(msg[0].toInt(), msg[1].toInt());
 			}
 		}
 	}

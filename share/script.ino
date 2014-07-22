@@ -88,11 +88,11 @@ void checkSensors (int analogPin)
 			}
 		}
 
-		if(v_max > 130)
+		if(v_max > 100)
 		{
 			if(PinPlayTime[i_max] == 0)
 			{
-				debug(i_max);
+				debug(i_max, v_max);
 				PinPlayTime[i_max] = 1024;
 			}
 		}
@@ -102,24 +102,9 @@ void checkSensors (int analogPin)
 	}
 }
 
-void debug(int num)
+void debug(int num, int vel)
 {
 	char message[32];
-	sprintf(message, "%d\r\n", num);
+	sprintf(message, "%d %d\r\n", num, vel);
 	Serial.write(message);
-}
-
-void MIDI_TX(unsigned char MESSAGE, int PITCH, int VELOCITY)
-{
-	/*
-	status = MESSAGE + midichannel;
-	Serial.write(status);
-	Serial.write(PITCH);
-	Serial.write(VELOCITY);
-	*/
-
-	char message[128];
-	sprintf(message, "PAD: %d %d %d\r\n", (int) MESSAGE, (int)PITCH, (int)VELOCITY);
-	Serial.write(message);
-
 }
