@@ -48,7 +48,7 @@
     <number>0</number>
    </property>
    <item alignment="Qt::AlignHCenter">
-    <widget class="QPushButton" name="button">
+    <widget class="QToolButton" name="button">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -69,15 +69,15 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>7</pointsize>
+       <pointsize>9</pointsize>
        <strikeout>false</strikeout>
        <kerning>true</kerning>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">
-QPushButton:checked{background-color: #00FF00;}
-QPushButton:pressed {background-color: #00FF00;}</string>
+QToolButton:checked{background-color: #00FF00;}
+QToolButton:pressed {background-color: #00FF00;}</string>
      </property>
      <property name="text">
       <string>Boucle</string>
@@ -288,24 +288,7 @@ QPushButton:pressed {background-color: #00FFFF;}</string>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ChannelWidget</receiver>
-   <slot>slot_enable(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>35</x>
-     <y>42</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>94</x>
-     <y>46</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <signal>on_solo(bool)</signal>
   <signal>on_mute(bool)</signal>

@@ -38,7 +38,10 @@ void ChannelWidget::setButtonColor(const QString hex)
 
 void ChannelWidget::load(const TrackData& track)
 {
-	ui->button->setText(track.name.c_str());
+	QString buttonName{track.name.c_str()};
+	if(buttonName.length() >= 8)
+		buttonName.insert(buttonName.length() / 2, "-\n");
+	ui->button->setText(buttonName);
 	ui->pan->setValue(track.pan);
 	ui->volume->setValue(track.volume);
 }
