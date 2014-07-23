@@ -12,7 +12,7 @@ void SerialManager::readyReadSlot()
 void SerialManager::run()
 {
 	// Ouverture du bon port
-	port = new QSerialPort("ttymxc3");
+	port = std::make_shared<QSerialPort>("ttymxc3");
 
 	// Configuration
 	port->open(QIODevice::ReadOnly);
@@ -36,6 +36,8 @@ void SerialManager::run()
 				auto msg = QString(txt).simplified().split(' ');
 				if(numRead > 0) emit boxActivated(msg[0].toInt(), msg[1].toInt());
 			}
+
+			if(finished) break;
 		}
 	}
 }

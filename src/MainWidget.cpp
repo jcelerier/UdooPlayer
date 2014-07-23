@@ -41,6 +41,11 @@ MainWidget::MainWidget(QWidget *parent) :
 MainWidget::~MainWidget()
 {
 	delete ui;
+	stop();
+	playThread.wait();
+
+	serialmanager.stop();
+	serialmanager.wait();
 }
 
 void MainWidget::switchBox(int i, int val)

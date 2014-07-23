@@ -4,6 +4,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
+#include <memory>
 
 class QSerialPort;
 /**
@@ -15,7 +16,7 @@ class SerialManager : public QThread
 {
 		Q_OBJECT
 	public:
-		QSerialPort* port;
+		std::shared_ptr<QSerialPort> port;
 		SerialManager(QObject* parent = 0):
 			QThread(parent)
 		{
@@ -27,9 +28,16 @@ class SerialManager : public QThread
 
 	public slots:
 		void readyReadSlot();
+		void stop()
+		{
+			finished = true;
+		}
 
 	protected:
 		virtual void run();
+
+	private:
+		bool finished{false};
 };
 
 #endif // SERIALMANAGER_H
