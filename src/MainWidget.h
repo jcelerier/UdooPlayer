@@ -6,6 +6,7 @@
 #include "SaveManager.h"
 #include "SerialManager.h"
 #include "ConfigurationDialog.h"
+#include "osc/oscreceiver.h"
 #include <exception>
 
 namespace Ui {
@@ -32,6 +33,9 @@ class MainWidget : public QWidget
 		{
 			return m_tempo;
 		}
+
+		void handle__box_enable(osc::ReceivedMessageArgumentStream args);
+		void handle__box_volume(osc::ReceivedMessageArgumentStream args);
 
 	signals:
 		void reset();
@@ -71,6 +75,7 @@ class MainWidget : public QWidget
 		SaveManager savemanager;
 		SerialManager serialmanager{this};
 		ConfigurationDialog confdialog{this};
+		OscReceiver oscReceiver{9988};
 
 		QString currentFile{};
 

@@ -63,6 +63,8 @@ class ChannelWidget : public QWidget
 		// Appelé lorsqu'on tape sur la boite
 		void slot_enable(bool);
 
+		void setVolume(int vol);
+
 };
 
 #endif // CHANNELWIDGET_H

@@ -25,7 +25,7 @@ SOURCES += main.cpp\
 	SaveManager.cpp \
 	TrackingSlider.cpp \
 	SerialManager.cpp \
-    ConfigurationDialog.cpp
+	ConfigurationDialog.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -36,13 +36,16 @@ HEADERS  += MainWindow.h \
 	SaveManager.h \
 	TrackingSlider.h \
 	SerialManager.h \
-    ConfigurationDialog.h
+	ConfigurationDialog.h \
+	osc/oscmessagegenerator.h \
+	osc/oscreceiver.h \
+	osc/oscsender.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
 	ChannelListWidget.ui \
 	MainWidget.ui \
-    ConfigurationDialog.ui
+	ConfigurationDialog.ui
 
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
@@ -61,3 +64,13 @@ OTHER_FILES += \
 	TrackingSliderVerticalDisabled.qss \
 	TrackingSliderHorizontalEnabled.qss \
 	TrackingSliderHorizontalDisabled.qss
+
+
+#### Libraries ####
+  ##  Oscpack  ##
+unix:!macx: LIBS += -L$$PWD/../../../git/oscpack/build/ -loscpack
+
+INCLUDEPATH += $$PWD/../../../git/oscpack/src
+DEPENDPATH += $$PWD/../../../git/oscpack/src
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../git/oscpack/build/liboscpack.a

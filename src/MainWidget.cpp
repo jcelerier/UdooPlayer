@@ -36,6 +36,14 @@ MainWidget::MainWidget(QWidget *parent) :
 	ui->masterVolume->setDefaultValue(80);
 	ui->masterVolume->setEnabledStylesheet();
 	serialmanager.start();
+
+	oscReceiver.addHandler("/box/enable",
+						   std::bind(&MainWidget::handle__box_enable,
+									 this, std::placeholders::_1));
+	oscReceiver.addHandler("/box/volume",
+						   std::bind(&MainWidget::handle__box_volume,
+									 this, std::placeholders::_1));
+	oscReceiver.run();
 }
 
 MainWidget::~MainWidget()
@@ -48,9 +56,25 @@ MainWidget::~MainWidget()
 	serialmanager.wait();
 }
 
+void MainWidget::handle__box_enable(osc::ReceivedMessageArgumentStream args)
+{
+	int box;
+	args >> box;
+
+	switchBox(box, confdialog.threshold);
+}
+void MainWidget::handle__box_volume(osc::ReceivedMessageArgumentStream args)
+{
+	int box;
+	int vol;
+	args >> box >> vol;
+
+	ui->channelList->channels[box]->setVolume(vol);
+}
+
 void MainWidget::switchBox(int i, int val)
 {
-	if(val > confdialog.threshold)
+	if(val >= confdialog.threshold)
 		ui->channelList->switchBox(i);
 }
 

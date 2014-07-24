@@ -80,6 +80,14 @@ void ChannelWidget::slot_enable(bool enabled)
 	emit on_enable(enabled);
 }
 
+void ChannelWidget::setVolume(int vol)
+{
+	if(vol != ui->volume->value())
+	{
+		ui->volume->setValue(vol);
+	}
+}
+
 
 bool ChannelWidget::is_solo() const
 {
