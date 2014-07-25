@@ -38,10 +38,12 @@ class MainWidget : public QWidget
 		void handle__box_volume(osc::ReceivedMessageArgumentStream args);
 
 	signals:
-		void reset();
 		void openConfDialog();
 
 	public slots:
+		// Remet les paramètres à zéro
+		void reset();
+
 		// Active / désactive une boite
 		void switchBox(int, int);
 
@@ -76,6 +78,8 @@ class MainWidget : public QWidget
 		SerialManager serialmanager{this};
 		ConfigurationDialog confdialog{this};
 		OscReceiver oscReceiver{9988};
+
+		SongData song;
 
 		QString currentFile{};
 

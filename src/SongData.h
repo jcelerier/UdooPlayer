@@ -34,7 +34,11 @@ struct SongData
 {
 		SongData() = default;
 		SongData(SongData&&) = default;
+		SongData& operator=(SongData&&) = default;
+
 		std::vector<TrackData> tracks{};
 		int tempo{};
 		std::string name{};
+		int sigNumerateur{};
+		int sigDenominateur{};
 };

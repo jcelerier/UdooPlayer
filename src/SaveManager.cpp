@@ -43,8 +43,10 @@ SongData SaveManager::load(const QString loadpath)
 	SongData sd;
 
 	int count = settings.value("General/trackCount").toInt();
-	sd.tempo =  settings.value("General/tempo").toInt();
-	sd.name = settings.value("General/songName").toString().toStdString();
+	sd.tempo  = settings.value("General/tempo").toInt();
+	sd.name   = settings.value("General/songName").toString().toStdString();
+	sd.sigNumerateur = settings.value("General/sigNumerator").toInt();
+	sd.sigDenominateur = settings.value("General/sigDenominator").toInt();
 
 	for(int i = 0; i < count; ++ i)
 	{

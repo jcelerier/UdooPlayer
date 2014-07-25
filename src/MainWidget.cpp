@@ -27,9 +27,6 @@ MainWidget::MainWidget(QWidget *parent) :
 	connect(&serialmanager,		&SerialManager::boxActivated,
 			this,				&MainWidget::switchBox);
 
-	connect(this,			 &MainWidget::reset,
-			ui->channelList, &ChannelListWidget::reset);
-
 	connect(this,		 &MainWidget::openConfDialog,
 			&confdialog, &ConfigurationDialog::exec);
 
@@ -72,6 +69,13 @@ void MainWidget::handle__box_volume(osc::ReceivedMessageArgumentStream args)
 	ui->channelList->channels[box]->setVolume(vol);
 }
 
+void MainWidget::reset()
+{
+	stop();
+	ui->masterVolume->setValue(ui->masterVolume->getDefaultValue());
+	ui->channelList->reset();
+}
+
 void MainWidget::switchBox(int i, int val)
 {
 	if(val >= confdialog.threshold)
@@ -92,9 +96,11 @@ void MainWidget::play()
 void MainWidget::stop()
 {
 	if(!m_loaded || !m_playing) return;
+
 	playThread.stop();
 	m_previousBeat = 0;
 	m_playing = false;
+	ui->timeCount->setBeats(0);
 }
 
 void MainWidget::updateBeat(double t) // en secondes
@@ -105,6 +111,8 @@ void MainWidget::updateBeat(double t) // en secondes
 		ui->temps->setText(QString("%1 / %2").arg(time)
 						   .arg(int(m_beatCount)));
 		m_previousBeat = time;
+
+		ui->timeCount->setBeats(time);
 	}
 }
 
@@ -115,6 +123,8 @@ void MainWidget::updateBeatCount(double t) // en secondes
 
 	m_beatCount = t * getTempo() / 60.0;
 	m_previousBeat = -1;
+
+	ui->timeCount->setMaxBeats(m_beatCount);
 }
 
 int MainWidget::load()
@@ -131,14 +141,17 @@ int MainWidget::load()
 		if(!file.isEmpty())
 		{
 			currentFile = file;
-			SongData song{savemanager.load(file)};
+			song = savemanager.load(file);
+			ui->timeCount->setNumerator(song.sigNumerateur);
+			ui->timeCount->setDenominator(song.sigDenominateur);
+
 			setTempo(song.tempo);
 
 			playThread.load(song);
 
 			ui->channelList->clear();
 			ui->channelList->load(song);
-			ui->masterVolume->setValue(80);
+			ui->masterVolume->setValue(ui->masterVolume->getDefaultValue());
 			ui->morceau->setText(QString::fromStdString(song.name));
 
 			m_loaded = true;

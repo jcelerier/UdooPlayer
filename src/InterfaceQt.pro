@@ -25,7 +25,8 @@ SOURCES += main.cpp\
 	SaveManager.cpp \
 	TrackingSlider.cpp \
 	SerialManager.cpp \
-	ConfigurationDialog.cpp
+	ConfigurationDialog.cpp \
+    GraphicalTimeCount.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -39,7 +40,8 @@ HEADERS  += MainWindow.h \
 	ConfigurationDialog.h \
 	osc/oscmessagegenerator.h \
 	osc/oscreceiver.h \
-	osc/oscsender.h
+	osc/oscsender.h \
+    GraphicalTimeCount.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \

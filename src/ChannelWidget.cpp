@@ -22,8 +22,8 @@ ChannelWidget::ChannelWidget(QWidget *parent) :
 
 	ui->volume->setDefaultValue(80);
 	ui->pan->setDefaultValue(0);
-	enable(true);
-	slot_enable(true); // Les signaux / slots ne sont pas encore dispos.
+	enable(false);
+	slot_enable(false); // Les signaux / slots ne sont pas encore dispos.
 }
 
 ChannelWidget::~ChannelWidget()
@@ -41,9 +41,15 @@ void ChannelWidget::load(const TrackData& track)
 	QString buttonName{track.name.c_str()};
 	if(buttonName.length() >= 8)
 		buttonName.insert(buttonName.length() / 2, "-\n");
+	else if(buttonName.length() < 6)
+		ui->button->setFont(QFont("Sans", 13));
+
 	ui->button->setText(buttonName);
 	ui->pan->setValue(track.pan);
 	ui->volume->setValue(track.volume);
+
+	enable(false);
+	slot_enable(false);
 }
 
 void ChannelWidget::mute(bool muted)
@@ -103,5 +109,8 @@ void ChannelWidget::reset()
 {
 	ui->volume->setValue(ui->volume->getDefaultValue());
 	ui->pan->setValue(ui->pan->getDefaultValue());
+	solo(false);
+	mute(false);
+	enable(false);
 }
 

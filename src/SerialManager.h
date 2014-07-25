@@ -16,7 +16,6 @@ class SerialManager : public QThread
 {
 		Q_OBJECT
 	public:
-		std::shared_ptr<QSerialPort> port;
 		SerialManager(QObject* parent = 0):
 			QThread(parent)
 		{
@@ -38,6 +37,7 @@ class SerialManager : public QThread
 
 	private:
 		bool finished{false};
+		std::shared_ptr<QSerialPort> port;
 };
 
 #endif // SERIALMANAGER_H

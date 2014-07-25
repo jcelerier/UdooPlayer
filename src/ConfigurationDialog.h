@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QSettings>
 
 namespace Ui {
 	class ConfigurationDialog;
@@ -16,6 +17,7 @@ class ConfigurationDialog : public QDialog
 		explicit ConfigurationDialog(QWidget *parent = 0);
 		~ConfigurationDialog();
 
+		void setThreshold();
 		int threshold{100};
 
 	public slots:
@@ -23,6 +25,7 @@ class ConfigurationDialog : public QDialog
 
 	private:
 		Ui::ConfigurationDialog *ui;
+		QSettings settings{"Rock et Chansons", "Boites Musicales"};
 };
 
 #endif // CONFIGURATIONDIALOG_H

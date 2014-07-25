@@ -233,8 +233,8 @@ position:absolute;
        </property>
        <property name="styleSheet">
         <string notr="true">
-QPushButton:checked{background-color: #F00;}
-QPushButton:pressed {background-color: #F00;}</string>
+QPushButton:checked{background-color: #0FF;}
+QPushButton:pressed {background-color: #0FF;}</string>
        </property>
        <property name="text">
         <string>M</string>
@@ -260,8 +260,8 @@ QPushButton:pressed {background-color: #F00;}</string>
        </property>
        <property name="styleSheet">
         <string notr="true">
-QPushButton:checked{background-color: #00FFFF;}
-QPushButton:pressed {background-color: #00FFFF;}</string>
+QPushButton:checked{background-color: #FF0;}
+QPushButton:pressed {background-color: #FF0;}</string>
        </property>
        <property name="text">
         <string>S</string>

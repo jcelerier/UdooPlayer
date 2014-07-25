@@ -70,7 +70,7 @@
        <item>
         <widget class="QLabel" name="morceau">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -101,16 +101,44 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="temps">
+        <widget class="GraphicalTimeCount" name="timeCount" native="true">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>540</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
+           <width>540</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="temps">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
            <height>40</height>
           </size>
          </property>
@@ -220,6 +248,12 @@
    <class>ChannelListWidget</class>
    <extends>QWidget</extends>
    <header>ChannelListWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GraphicalTimeCount</class>
+   <extends>QWidget</extends>
+   <header>GraphicalTimeCount.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

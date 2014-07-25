@@ -8,7 +8,9 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent):
 	ui->setupUi(this);
 	ui->sensibility->setEnabledStylesheet();
 	ui->sensibility->setDefaultValue(0);
-	ui->sensibility->setValue(ui->sensibility->getDefaultValue());
+	ui->sensibility->setValue(settings.value("Global/Sensibility").toInt());
+
+	setThreshold();
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -16,9 +18,16 @@ ConfigurationDialog::~ConfigurationDialog()
 	delete ui;
 }
 
+void ConfigurationDialog::setThreshold()
+{
+	threshold = (99 - ui->sensibility->value()) * 4 + 100;
+}
+
 void ConfigurationDialog::accept()
 {
 	QDialog::accept();
-	threshold = ui->sensibility->value() * 4 + 100;
-	qDebug() << threshold;
+	setThreshold();
+
+	settings.setValue("Global/Sensibility", ui->sensibility->value());
+	settings.sync();
 }

@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	connect(ui->actionReset, SIGNAL(triggered()), ui->centralWidget, SIGNAL(reset()));
+	connect(ui->actionReset, SIGNAL(triggered()), ui->centralWidget, SLOT(reset()));
 	connect(ui->actionConfiguration, SIGNAL(triggered()), ui->centralWidget, SIGNAL(openConfDialog()));
 	//this->showFullScreen();
 }
