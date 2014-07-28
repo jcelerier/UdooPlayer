@@ -29,8 +29,8 @@ ChannelListWidget::~ChannelListWidget()
 
 void ChannelListWidget::switchBox(int i)
 {
-	if(channels.count() > i)
-	channels[i]->enable(!channels[i]->is_enabled());
+	if(i < channels.size())
+		channels[i]->enable(!channels[i]->is_enabled());
 }
 
 void ChannelListWidget::clear()
@@ -129,16 +129,20 @@ void ChannelListWidget::on_soloChanged(bool isSoloed)
 			}
 		}
 		channels[id]->mute(false);
+		emit muteChanged(CHANNEL_INDEX, false);
 	}
 	else
 	{
 		if(!std::any_of(begin(channels),
 					   end(channels),
 					   [] (ChannelWidget* chan) { return chan->is_solo(); }))
+		{
+			// Si plus personne n'a solo, on demute tout le monde
 			for(int i = 0; i < channels.size(); i++)
 			{
 				channels[i]->mute(false);
 			}
+		}
 		else
 			channels[id]->mute(true);
 	}

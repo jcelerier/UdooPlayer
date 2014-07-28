@@ -81,8 +81,8 @@ void checkSensors (int analogPin)
 				i_max = pin;
 			}
 
-                        hitavg[pin] = 0;
-                        if(PinPlayTime[pin] > 0)
+			hitavg[pin] = 0;
+			if(PinPlayTime[pin] > 0)
 			{
 				PinPlayTime[pin]--;
 			}

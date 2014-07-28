@@ -21,14 +21,18 @@ void PlayThread::run()
 {
 	manager->input()->reset();
 	bufferCount = 0;
+	isPlaying = true;
+
 	manager->execute();
 }
 
 void PlayThread::stop()
 {
 	manager->stop();
+
 	manager->input()->reset();
 	bufferCount = 0;
+	isPlaying = false;
 }
 
 void PlayThread::load(const SongData& s)

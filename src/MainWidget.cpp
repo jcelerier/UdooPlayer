@@ -101,19 +101,28 @@ void MainWidget::stop()
 	playThread.stop();
 	m_previousBeat = 0;
 	m_playing = false;
-	ui->timeCount->setBeats(0);
+	updateBeat(0);
 }
 
 void MainWidget::updateBeat(double t) // en secondes
 {
 	int time{t * getTempo() / 60.0 + 1};
-	if(time != m_previousBeat && time <= m_beatCount)
+
+	if(time != m_previousBeat && time <= m_beatCount && !playThread.isStopped())
 	{
 		ui->temps->setText(QString("%1 / %2").arg(time)
 						   .arg(int(m_beatCount)));
 		m_previousBeat = time;
 
 		ui->timeCount->setBeats(time);
+	}
+	else if(playThread.isStopped())
+	{
+		ui->temps->setText(QString("%1 / %2").arg(1)
+						   .arg(int(m_beatCount)));
+		m_previousBeat = 0;
+
+		ui->timeCount->setBeats(0);
 	}
 }
 
@@ -138,7 +147,6 @@ int MainWidget::load()
 													"/home/ubuntu/songs", // Hardcodé
 													"Musique (*.song)");
 
-		qDebug() << file << file.isEmpty();
 		if(!file.isEmpty())
 		{
 			currentFile = file;
@@ -172,5 +180,6 @@ int MainWidget::load()
 
 void MainWidget::save()
 {
-	savemanager.save(currentFile, this);
+	if(m_loaded)
+		savemanager.save(currentFile, this);
 }

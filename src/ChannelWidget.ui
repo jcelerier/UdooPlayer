@@ -305,10 +305,27 @@ QPushButton:pressed {background-color: #FF0;}</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>solo</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ChannelWidget</receiver>
+   <slot>slot_solo(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>50</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>on_solo(bool)</signal>
   <signal>on_mute(bool)</signal>
   <slot>slot_enable(bool)</slot>
+  <slot>slot_solo(bool)</slot>
  </slots>
 </ui>

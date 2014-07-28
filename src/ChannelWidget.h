@@ -65,6 +65,8 @@ class ChannelWidget : public QWidget
 
 		void setVolume(int vol);
 
+		void slot_mute(bool muted);
+		void slot_solo(bool soloed);
 };
 
 #endif // CHANNELWIDGET_H

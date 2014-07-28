@@ -26,7 +26,7 @@ SOURCES += main.cpp\
 	TrackingSlider.cpp \
 	SerialManager.cpp \
 	ConfigurationDialog.cpp \
-    GraphicalTimeCount.cpp
+	GraphicalTimeCount.cpp
 
 HEADERS  += MainWindow.h \
 	ChannelWidget.h \
@@ -41,7 +41,7 @@ HEADERS  += MainWindow.h \
 #	osc/oscmessagegenerator.h \
 #	osc/oscreceiver.h \
 #	osc/oscsender.h \
-    GraphicalTimeCount.h
+	GraphicalTimeCount.h
 
 FORMS    += MainWindow.ui \
 	ChannelWidget.ui \
@@ -52,7 +52,8 @@ FORMS    += MainWindow.ui \
 INCLUDEPATH += $$PWD/../../watermarking/src/libwatermark
 DEPENDPATH += $$PWD/../../watermarking/src/libwatermark
 
-LIBS+= -lgomp -lgcov -lportaudiocpp -lportaudio -lavcodec -lavformat -lavutil -lsndfile
+LIBS+= -lgomp -lportaudiocpp -lportaudio -lsndfile # -lavcodec -lavformat -lavutil
+#LIBS+= -lgcov
 
 
 INCLUDEPATH += /usr/local/include/KF5/KArchive
@@ -65,7 +66,9 @@ OTHER_FILES += \
 	TrackingSliderVerticalEnabled.qss \
 	TrackingSliderVerticalDisabled.qss \
 	TrackingSliderHorizontalEnabled.qss \
-	TrackingSliderHorizontalDisabled.qss
+	TrackingSliderHorizontalDisabled.qss \
+    TrackingSliderVerticalSolo.qss \
+    TrackingSliderHorizontalSolo.qss
 
 
 #### Libraries ####

@@ -75,6 +75,9 @@ class PlayThread : public QThread
 		// Arrête la lecture
 		void stop();
 
+		bool isStopped()
+		{ return !isPlaying; }
+
 	private:
 		Parameters<double> conf;
 		std::shared_ptr<Amplify<double>> masterVolume{new Amplify<double>(conf)};
@@ -88,6 +91,8 @@ class PlayThread : public QThread
 
 		// Nombre de buffers total dans une boucle
 		int maxBufferCount{};
+
+		bool isPlaying{false};
 };
 
 #endif // PLAYTHREAD_H

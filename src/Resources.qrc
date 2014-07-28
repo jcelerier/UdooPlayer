@@ -3,5 +3,8 @@
         <file>TrackingSliderVerticalEnabled.qss</file>
         <file>TrackingSliderVerticalDisabled.qss</file>
         <file>TrackingSliderHorizontalEnabled.qss</file>
+        <file>TrackingSliderHorizontalDisabled.qss</file>
+        <file>TrackingSliderHorizontalSolo.qss</file>
+        <file>TrackingSliderVerticalSolo.qss</file>
     </qresource>
 </RCC>

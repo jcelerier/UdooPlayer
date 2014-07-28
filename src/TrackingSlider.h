@@ -25,38 +25,9 @@
 			return m_defaultValue;
 		}
 
-		virtual void setEnabledStylesheet()
-		{
-			QFile file;
-			if(orientation() == Qt::Vertical)
-			{
-				file.setFileName(":/qss/TrackingSliderVerticalEnabled.qss");
-			}
-			else
-			{
-				file.setFileName(":/qss/TrackingSliderHorizontalEnabled.qss");
-			}
-			file.open(QFile::ReadOnly);
-			setStyleSheet(file.readAll());
-			ensurePolished();
-		}
-
-		virtual void setDisabledStylesheet()
-		{
-			QFile file;
-			if(orientation() == Qt::Vertical)
-			{
-				file.setFileName(":/qss/TrackingSliderVerticalDisabled.qss");
-			}
-			else
-			{
-				file.setFileName(":/qss/TrackingSliderHorizontalDisabled.qss");
-			}
-
-			file.open(QFile::ReadOnly);
-			setStyleSheet(file.readAll());
-			ensurePolished();
-		}
+		virtual void setEnabledStylesheet();
+		virtual void setDisabledStylesheet();
+		virtual void setSoloStylesheet();
 
 	public slots:
 		void setDefaultValue(int arg)

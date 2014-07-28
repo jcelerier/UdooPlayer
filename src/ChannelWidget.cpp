@@ -15,7 +15,7 @@ ChannelWidget::ChannelWidget(QWidget *parent) :
 			this,		SIGNAL(panChanged(int)));
 
 	connect(ui->mute,	SIGNAL(toggled(bool)),
-			this,		SIGNAL(on_mute(bool)));
+			this,		SLOT(slot_mute(bool)));
 
 	connect(ui->solo,	SIGNAL(toggled(bool)),
 			this,		SIGNAL(on_solo(bool)));
@@ -74,16 +74,46 @@ bool ChannelWidget::is_enabled() const
 
 void ChannelWidget::slot_enable(bool enabled)
 {
-	if(enabled)
+	if(!is_solo())
 	{
-		ui->volume->setEnabledStylesheet();
+		if(enabled)
+		{
+			ui->volume->setEnabledStylesheet();
+		}
+		else
+		{
+			ui->volume->setDisabledStylesheet();
+		}
+
+
+		emit on_enable(enabled);
+	}
+}
+void ChannelWidget::slot_solo(bool soloed)
+{
+	if(soloed)
+	{
+		ui->volume->setSoloStylesheet();
 	}
 	else
 	{
-		ui->volume->setDisabledStylesheet();
+		if(is_enabled())
+		{
+			ui->volume->setEnabledStylesheet();
+		}
+		else
+		{
+			ui->volume->setDisabledStylesheet();
+		}
 	}
+}
 
-	emit on_enable(enabled);
+void ChannelWidget::slot_mute(bool muted)
+{
+	if(is_solo())
+		ui->mute->setChecked(false);
+	else
+		emit on_mute(muted);
 }
 
 void ChannelWidget::setVolume(int vol)
