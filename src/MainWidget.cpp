@@ -20,12 +20,12 @@ MainWidget::MainWidget(QWidget *parent) :
 			&playThread,	  SLOT(setMasterVolume(int)));
 
 	connect(&playThread,	&PlayThread::spentTime,
-			this,			&MainWidget::updateBeat);
+			this,		&MainWidget::updateBeat);
 	connect(&playThread,	&PlayThread::setTotalTime,
-			this,			&MainWidget::updateBeatCount);
+			this,		&MainWidget::updateBeatCount);
 
-	connect(&serialmanager,		&SerialManager::boxActivated,
-			this,				&MainWidget::switchBox);
+	connect(&serialmanager,	&SerialManager::boxActivated,
+			this,			&MainWidget::switchBox);
 
 	connect(this,		 &MainWidget::openConfDialog,
 			&confdialog, &ConfigurationDialog::exec);
@@ -33,7 +33,7 @@ MainWidget::MainWidget(QWidget *parent) :
 	ui->masterVolume->setDefaultValue(80);
 	ui->masterVolume->setEnabledStylesheet();
 	serialmanager.start();
-/*
+
 	oscReceiver.addHandler("/box/enable",
 						   std::bind(&MainWidget::handle__box_enable,
 									 this, std::placeholders::_1));
@@ -41,7 +41,7 @@ MainWidget::MainWidget(QWidget *parent) :
 						   std::bind(&MainWidget::handle__box_volume,
 									 this, std::placeholders::_1));
 	oscReceiver.run();
-*/
+
 }
 
 MainWidget::~MainWidget()
@@ -53,7 +53,7 @@ MainWidget::~MainWidget()
 	serialmanager.stop();
 	serialmanager.wait();
 }
-/*
+
 void MainWidget::handle__box_enable(osc::ReceivedMessageArgumentStream args)
 {
 	osc::int32 box;
@@ -67,9 +67,10 @@ void MainWidget::handle__box_volume(osc::ReceivedMessageArgumentStream args)
 	osc::int32 vol;
 	args >> box >> vol;
 
-	ui->channelList->channels[box]->setVolume(vol);
+	if(box < ui->channelList->channels.size())
+		ui->channelList->channels[box]->setVolume(vol);
 }
-*/
+
 void MainWidget::reset()
 {
 	stop();

@@ -67,15 +67,15 @@ OTHER_FILES += \
 	TrackingSliderVerticalDisabled.qss \
 	TrackingSliderHorizontalEnabled.qss \
 	TrackingSliderHorizontalDisabled.qss \
-    TrackingSliderVerticalSolo.qss \
-    TrackingSliderHorizontalSolo.qss
+	TrackingSliderVerticalSolo.qss \
+	TrackingSliderHorizontalSolo.qss
 
 
 #### Libraries ####
   ##  Oscpack  ##
-#unix:!macx: LIBS += -L$$PWD/../../../git/oscpack/build/ -loscpack
+unix:!macx: LIBS += -L$$PWD/../../../git/oscpack/build/ -loscpack
 
-#INCLUDEPATH += $$PWD/../../../git/oscpack/src
-#DEPENDPATH += $$PWD/../../../git/oscpack/src
+INCLUDEPATH += $$PWD/../../../git/oscpack/src
+DEPENDPATH += $$PWD/../../../git/oscpack/src
 
-#unix:!macx: PRE_TARGETDEPS += $$PWD/../../../git/oscpack/build/liboscpack.a
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../git/oscpack/build/liboscpack.a
