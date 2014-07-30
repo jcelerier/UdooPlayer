@@ -181,6 +181,13 @@ int MainWidget::load()
 
 void MainWidget::save()
 {
-	if(m_loaded)
-		savemanager.save(currentFile, this);
+	try
+	{
+		if(m_loaded)
+			savemanager.save(currentFile, this);
+	}
+	catch(std::exception& e)
+	{
+		QMessageBox::warning(this, tr("Erreur à la sauvegarde"), e.what());
+	}
 }

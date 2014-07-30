@@ -22,6 +22,7 @@ class ConfigurationDialog : public QDialog
 
 	public slots:
 		void accept();
+		void reset();
 
 	private:
 		Ui::ConfigurationDialog *ui;

@@ -7,10 +7,11 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent):
 {
 	ui->setupUi(this);
 	ui->sensibility->setEnabledStylesheet();
-	ui->sensibility->setDefaultValue(0);
+	ui->sensibility->setDefaultValue(ui->sensibility->maximum());
 	ui->sensibility->setValue(settings.value("Global/Sensibility").toInt());
 
 	setThreshold();
+	connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(reset()));
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -30,4 +31,9 @@ void ConfigurationDialog::accept()
 
 	settings.setValue("Global/Sensibility", ui->sensibility->value());
 	settings.sync();
+}
+
+void ConfigurationDialog::reset()
+{
+	ui->sensibility->setValue(ui->sensibility->maximum());
 }
